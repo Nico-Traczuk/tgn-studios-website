@@ -45,7 +45,7 @@ export default function Studio() {
       <div style={{ marginBottom: '56px' }}>
         <ScrollReveal>
           <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
-            <span className="sec-label-num">③</span>
+            <span className="sec-label-num">3</span>
             <span className="sec-label-line" />
             Our Studio
           </div>
@@ -68,8 +68,8 @@ export default function Studio() {
         {disciplines.map((d, i) => (
           <ScrollReveal key={d.name} delay={(i > 0 ? i + 1 : 0) as 0 | 1 | 2 | 3}>
             <div
-              style={{ background: 'var(--card-light)', padding: '36px 32px', transition: 'background 0.3s, transform 0.3s', height: '100%' }}
-              className="group hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(26,16,7,0.08)]"
+              style={{ background: 'var(--card-light)', padding: '36px 32px', height: '100%' }}
+              className="pkg-card"
             >
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '16px',

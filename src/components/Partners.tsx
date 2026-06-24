@@ -17,7 +17,7 @@ export default function Partners() {
     >
       <ScrollReveal>
         <div className="sec-label" style={{ color: 'rgba(240,232,218,0.45)' }}>
-          <span className="sec-label-num">⑤</span>
+          <span className="sec-label-num">5</span>
           <span className="sec-label-line" />
           Studio Partners
         </div>

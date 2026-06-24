@@ -17,7 +17,7 @@ export default function Philosophy() {
     >
       <ScrollReveal>
         <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
-          <span className="sec-label-num">⑦</span>
+          <span className="sec-label-num">7</span>
           <span className="sec-label-line" />
           Philosophy
         </div>

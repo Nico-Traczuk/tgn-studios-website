@@ -55,7 +55,7 @@ export default function Why() {
     >
       <ScrollReveal>
         <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
-          <span className="sec-label-num">⑥</span>
+          <span className="sec-label-num">6</span>
           <span className="sec-label-line" />
           Why TGN Studios
         </div>
@@ -73,20 +73,24 @@ export default function Why() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px' }}>
         {items.map((item, i) => (
           <ScrollReveal key={item.title} delay={(i as 0 | 1 | 2 | 3)}>
-            <div style={{ paddingLeft: '24px', borderLeft: '1px solid rgba(26,16,7,0.15)' }}>
+            <div style={{ paddingLeft: '24px' }} className="why-item">
               <div style={{ width: '64px', height: '64px', marginBottom: '24px', color: '#1A1007', opacity: 0.45 }}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.0" strokeLinecap="round" strokeLinejoin="round" style={{ width: '64px', height: '64px' }}>
                   {item.icon.props.children}
                 </svg>
               </div>
-              <div style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '17px',
-                fontWeight: 600,
-                color: '#1A1007',
-                marginBottom: '12px',
-                letterSpacing: '0.01em',
-              }}>
+              <div
+                className="why-title"
+                style={{
+                  fontFamily: 'var(--font-inter)',
+                  fontSize: '17px',
+                  fontWeight: 600,
+                  color: '#1A1007',
+                  marginBottom: '12px',
+                  letterSpacing: '0.01em',
+                  transition: 'color 0.25s ease',
+                }}
+              >
                 {item.title}
               </div>
               <p style={{ fontSize: '16px', color: '#6A5A48', lineHeight: 1.85 }}>{item.desc}</p>

@@ -13,7 +13,7 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrent((c) => (c + 1) % slides.length), 3000);
+    const timer = setInterval(() => setCurrent((c) => (c + 1) % slides.length), 4500);
     return () => clearInterval(timer);
   }, []);
 
@@ -21,12 +21,12 @@ export default function Hero() {
     <section
       id="hero"
       style={{ background: 'var(--dark)' }}
-      className="min-h-screen grid grid-cols-2 items-center gap-16 px-12 pt-24 pb-16 overflow-hidden"
+      className="min-h-screen grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-16 px-6 md:px-12 pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden"
     >
       {/* Left */}
       <div className="relative z-[2]">
         <div className="sec-label hero-anim-1" style={{ color: 'rgba(240,232,218,0.45)' }}>
-          <span className="sec-label-num">①</span>
+          <span className="sec-label-num">1</span>
           <span className="sec-label-line" />
           Venture Studio
         </div>
@@ -46,7 +46,7 @@ export default function Hero() {
         </h1>
 
         <p
-          className="hero-anim-3 font-light leading-[1.8] mb-10"
+          className="hero-anim-3 font-light leading-[1.8] mb-6 md:mb-10"
           style={{ fontSize: '18px', color: 'rgba(240,232,218,0.6)', maxWidth: '460px' }}
         >
           We help founders launch companies through exceptional branding, product
@@ -54,13 +54,13 @@ export default function Hero() {
           execution to early-stage builders.
         </p>
 
-        <div className="hero-anim-4 flex gap-[14px] mb-12">
+        <div className="hero-anim-4 flex gap-[14px] mb-6 md:mb-12">
           <Link href="#contact" className="btn-cta">Start a Project →</Link>
           <Link href="#studio" className="btn-secondary">View Services →</Link>
         </div>
 
         <p
-          className="hero-anim-5 italic leading-[1.75]"
+          className="hero-anim-5 italic leading-[1.75] hidden md:block"
           style={{ fontSize: '13.5px', color: 'rgba(240,232,218,0.35)', maxWidth: '340px' }}
         >
           Built by founders, operators, and investors who understand what it takes
@@ -69,7 +69,7 @@ export default function Hero() {
       </div>
 
       {/* Right — carousel */}
-      <div className="hero-slide-in relative h-[580px] rounded-sm overflow-hidden">
+      <div className="hero-slide-in relative h-[260px] md:h-[580px] rounded-sm overflow-hidden">
         {slides.map((s, i) => (
           <div key={s.cls} className={`slide ${s.cls} ${i === current ? 'active' : ''}`}>
             <span
@@ -81,17 +81,27 @@ export default function Hero() {
           </div>
         ))}
 
+        {/* Slide progress */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-[3]" style={{ background: 'rgba(240,232,218,0.06)' }}>
+          <div
+            key={current}
+            style={{ height: '100%', background: 'rgba(240,232,218,0.32)', animation: 'slideProgress 4.5s linear forwards' }}
+          />
+        </div>
+
         {/* Dots */}
-        <div className="absolute bottom-8 right-8 flex gap-2 z-[3]">
+        <div className="absolute bottom-[18px] right-8 flex gap-[7px] z-[3]">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
+              aria-label={`Slide ${i + 1}`}
               style={{
-                background: i === current ? 'var(--cream)' : 'rgba(240,232,218,0.25)',
-                transform: i === current ? 'scale(1.3)' : 'scale(1)',
+                background: i === current ? 'var(--cream)' : 'rgba(240,232,218,0.22)',
+                transform: i === current ? 'scale(1.35)' : 'scale(1)',
+                width: i === current ? '18px' : '6px',
               }}
-              className="w-[5px] h-[5px] rounded-full border-none cursor-pointer transition-all duration-300"
+              className="h-[6px] rounded-full border-none cursor-pointer transition-all duration-500 p-0"
             />
           ))}
         </div>

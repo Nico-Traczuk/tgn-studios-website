@@ -39,7 +39,7 @@ export default function Packages() {
     >
       <ScrollReveal>
         <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
-          <span className="sec-label-num">④</span>
+          <span className="sec-label-num">4</span>
           <span className="sec-label-line" />
           Packages
         </div>
@@ -59,8 +59,8 @@ export default function Packages() {
         {packages.map((pkg, i) => (
           <ScrollReveal key={pkg.name} delay={(i > 0 ? i + 1 : 0) as 0 | 1 | 2 | 3}>
             <div
-              style={{ background: pkg.bg, padding: '34px 28px', transition: 'background 0.3s', height: '100%' }}
-              className="hover:brightness-105"
+              style={{ background: pkg.bg, padding: '34px 28px', height: '100%' }}
+              className="pkg-card"
             >
               <div style={{ fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9B8B72', marginBottom: '6px' }}>Starting at</div>
               <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '38px', fontWeight: 400, color: '#1A1007', marginBottom: '4px' }}>{pkg.name}</div>
