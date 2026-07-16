@@ -313,13 +313,11 @@ body {
     padding-left: 24px !important;
     padding-right: 24px !important;
     padding-top: 64px !important;
+    padding-bottom: 64px !important;
     gap: 28px !important;
   }
-  .about-image-ph {
-    width: calc(100% + 48px) !important;
-    margin-left: -24px !important;
-    min-height: 220px !important;
-  }
+  #about h2 { padding-bottom: 0 !important; }
+  .about-image-ph { display: none !important; }
 
   /* Studio */
   #studio {
@@ -353,8 +351,15 @@ body {
     gap: 32px !important;
   }
   #why > div:last-child {
-    grid-template-columns: 1fr !important;
-    gap: 28px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+  #why .why-item { padding-left: 16px !important; }
+  #why .why-item > div:first-child,
+  #why .why-item > div:first-child svg {
+    width: 36px !important;
+    height: 36px !important;
+    margin-bottom: 14px !important;
   }
 
   /* Philosophy */
@@ -363,13 +368,11 @@ body {
     padding-left: 24px !important;
     padding-right: 24px !important;
     padding-top: 64px !important;
+    padding-bottom: 64px !important;
     gap: 28px !important;
   }
-  .phil-image-ph {
-    width: calc(100% + 48px) !important;
-    margin-left: -24px !important;
-    min-height: 200px !important;
-  }
+  #philosophy h2 { padding-bottom: 0 !important; }
+  .phil-image-ph { display: none !important; }
 
   /* Book a Call */
   #book {
@@ -382,18 +385,14 @@ body {
   /* Footer */
   footer#contact {
     grid-template-columns: 1fr !important;
-    padding: 40px 24px !important;
-    gap: 24px !important;
-    justify-items: center !important;
-    text-align: center !important;
+    padding: 48px 24px !important;
+    gap: 32px !important;
+    justify-items: start !important;
+    text-align: left !important;
   }
   footer#contact ul {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-  }
-  footer#contact > div:last-child {
-    justify-content: center !important;
-    width: 100% !important;
+    flex-direction: column !important;
+    gap: 14px !important;
   }
 }
 

@@ -92,7 +92,7 @@ export default function Nav() {
             ))}
           </ul>
           <Link href="#book" className="btn-cta">
-            Book a Discovery Call →
+            Schedule a Call →
           </Link>
         </div>
 
@@ -188,7 +188,7 @@ export default function Nav() {
             className="px-6 py-5"
           >
             <Link href="#book" className="btn-cta w-full justify-center" onClick={closeMenu}>
-              Book a Discovery Call →
+              Schedule a Call →
             </Link>
           </div>
         </div>

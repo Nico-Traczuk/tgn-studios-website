@@ -42,7 +42,7 @@ export default function Partners() {
           We reserve these partnerships for founders building businesses with exceptional potential
           and strong alignment with our values.
         </p>
-        <Link href="#contact" className="btn-outline">Inquire About Partnership →</Link>
+        <Link href="#book" className="btn-outline">Inquire About Partnership →</Link>
       </ScrollReveal>
     </section>
   );

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ScrollReveal from './ScrollReveal';
 import { BOOKING_URL } from '@/config';
 
@@ -52,13 +53,9 @@ export default function BookCall() {
             Book a Discovery Call →
           </a>
         ) : (
-          <button
-            className="btn-cta"
-            style={{ fontSize: '13px', padding: '14px 36px', cursor: 'default', opacity: 0.5 }}
-            disabled
-          >
+          <Link href="#contact" className="btn-cta" style={{ fontSize: '13px', padding: '14px 36px' }}>
             Book a Discovery Call →
-          </button>
+          </Link>
         )}
       </ScrollReveal>
     </section>
