@@ -1,0 +1,3 @@
+// TODO: Replace with the host's Google Calendar appointment scheduling link
+// Format: https://calendar.google.com/calendar/appointments/schedules/...
+export const BOOKING_URL = '';

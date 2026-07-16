@@ -10,7 +10,7 @@ export default function Footer() {
         background: 'var(--dark)',
         padding: '48px',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateColumns: '1fr 1fr',
         gap: '40px',
         alignItems: 'center',
         borderTop: '1px solid rgba(240,232,218,0.06)',
@@ -53,10 +53,6 @@ export default function Footer() {
         ))}
       </ul>
 
-      {/* CTA */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Link href="#contact" className="btn-cta">Schedule a Conversation →</Link>
-      </div>
     </footer>
   );
 }

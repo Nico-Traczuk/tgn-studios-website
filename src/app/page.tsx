@@ -7,6 +7,7 @@ import Packages from '@/components/Packages';
 import Partners from '@/components/Partners';
 import Why from '@/components/Why';
 import Philosophy from '@/components/Philosophy';
+import BookCall from '@/components/BookCall';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
         <Partners />
         <Why />
         <Philosophy />
+        <BookCall />
         <Footer />
       </main>
     </>

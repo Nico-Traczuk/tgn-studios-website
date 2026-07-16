@@ -15,13 +15,6 @@ const packages = [
     items: ['Brand Identity', 'Landing Page', 'Product Prototype', 'Customer & Discovery Framework'],
     bg: '#FAF5EE',
   },
-  {
-    name: 'MVP',
-    price: '15,000',
-    desc: 'For founders ready to build.',
-    items: ['Product Design', 'Functional MVP', 'Investor Materials', 'Go-To-Market Planning'],
-    bg: '#E8DDD0',
-  },
 ];
 
 export default function Packages() {
@@ -55,7 +48,7 @@ export default function Packages() {
         </h2>
       </ScrollReveal>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: 'rgba(26,16,7,0.08)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px', background: 'rgba(26,16,7,0.08)' }}>
         {packages.map((pkg, i) => (
           <ScrollReveal key={pkg.name} delay={(i > 0 ? i + 1 : 0) as 0 | 1 | 2 | 3}>
             <div

@@ -3,7 +3,6 @@ import ScrollReveal from './ScrollReveal';
 const disciplines = [
   {
     name: 'Branding',
-    lead: 'Led by Tony & Co',
     tagline: 'Craft a brand worthy of the vision.',
     colorClass: '#2A3D22',
     icon: (
@@ -15,7 +14,6 @@ const disciplines = [
   },
   {
     name: 'Product',
-    lead: 'Led by Amadeu Tolentino',
     tagline: 'Transform ideas into products people actually use.',
     colorClass: '#1E3028',
     icon: (
@@ -27,7 +25,6 @@ const disciplines = [
   },
   {
     name: 'Advisory',
-    lead: 'Led by Darrel Frater',
     tagline: 'Navigate growth with experienced founders and investors.',
     colorClass: '#7A2020',
     icon: (
@@ -81,7 +78,6 @@ export default function Studio() {
                 </div>
                 <div>
                   <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '32px', fontWeight: 400, color: 'var(--dark)' }}>{d.name}</div>
-                  <div style={{ fontSize: '16px', color: 'var(--muted)', marginTop: '4px' }}>{d.lead}</div>
                 </div>
               </div>
               <p style={{ fontSize: '17px', color: 'var(--muted-dark)', marginBottom: '22px', lineHeight: 1.7 }}>{d.tagline}</p>

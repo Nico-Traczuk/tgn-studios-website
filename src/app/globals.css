@@ -371,6 +371,14 @@ body {
     min-height: 200px !important;
   }
 
+  /* Book a Call */
+  #book {
+    padding: 80px 24px !important;
+  }
+  #book h2 {
+    font-size: clamp(36px, 9vw, 52px) !important;
+  }
+
   /* Footer */
   footer#contact {
     grid-template-columns: 1fr !important;
@@ -386,10 +394,6 @@ body {
   footer#contact > div:last-child {
     justify-content: center !important;
     width: 100% !important;
-  }
-  footer#contact > div:last-child .btn-cta {
-    width: 100% !important;
-    justify-content: center !important;
   }
 }
 

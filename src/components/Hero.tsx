@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { BOOKING_URL } from '@/config';
 
 const slides = [
   { cls: 'slide-1', label: 'Branding · Product · Advisory' },
@@ -54,8 +55,14 @@ export default function Hero() {
           execution to early-stage builders.
         </p>
 
-        <div className="hero-anim-4 flex gap-[14px] mb-6 md:mb-12">
-          <Link href="#contact" className="btn-cta">Start a Project →</Link>
+        <div className="hero-anim-4 flex flex-wrap gap-[14px] mb-6 md:mb-12">
+          {BOOKING_URL ? (
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-cta">
+              Book a Discovery Call →
+            </a>
+          ) : (
+            <Link href="#book" className="btn-cta">Book a Discovery Call →</Link>
+          )}
           <Link href="#studio" className="btn-secondary">View Services →</Link>
         </div>
 
