@@ -1,6 +1,12 @@
 import Link from 'next/link';
 
-const links = ['TGN Ventures', 'TGN Community', 'TGN Foundation', 'TGN Studios'];
+const links = [
+  { label: 'TGN Ventures',  href: 'https://tgnventures.vc', external: true },
+  { label: 'TGN Community', href: 'https://app.ourloop.life/loop/the-good-news-founder-community', external: true },
+  { label: 'TGN Studios',   href: '/', external: false },
+];
+
+const linkStyle = { fontSize: '11.5px', color: 'rgba(240,232,218,0.38)', textDecoration: 'none', letterSpacing: '0.04em', transition: 'color 0.2s' };
 
 export default function Footer() {
   return (
@@ -34,11 +40,16 @@ export default function Footer() {
       {/* Links */}
       <ul style={{ display: 'flex', gap: '22px', justifyContent: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
         {links.map((l) => (
-          <li key={l}>
-            <Link href="#" style={{ fontSize: '11.5px', color: 'rgba(240,232,218,0.38)', textDecoration: 'none', letterSpacing: '0.04em', transition: 'color 0.2s' }}
-              className="hover:text-[rgba(240,232,218,0.7)]">
-              {l}
-            </Link>
+          <li key={l.label}>
+            {l.external ? (
+              <a href={l.href} target="_blank" rel="noopener noreferrer" style={linkStyle} className="hover:text-[rgba(240,232,218,0.7)]">
+                {l.label}
+              </a>
+            ) : (
+              <Link href={l.href} style={linkStyle} className="hover:text-[rgba(240,232,218,0.7)]">
+                {l.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
