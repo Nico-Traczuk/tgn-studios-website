@@ -17,19 +17,9 @@ export default function Footer() {
       }}
     >
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div
-          style={{
-            width: '46px', height: '36px',
-            border: '1.5px solid rgba(240,232,218,0.35)',
-            borderRadius: '2px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--font-cormorant)',
-            fontSize: '13px', letterSpacing: '0.05em',
-            color: 'var(--cream)',
-          }}
-        >
-          TGN
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ width: '120px', height: '48px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
+          <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '162px', height: 'auto', marginLeft: '-13px', marginTop: '-39px' }} />
         </div>
         <div>
           <div style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(240,232,218,0.55)' }}>

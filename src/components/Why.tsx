@@ -54,7 +54,7 @@ export default function Why() {
       }}
     >
       <ScrollReveal>
-        <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
+        <div className="sec-label" style={{ color: 'rgba(59,41,33,0.4)' }}>
           <span className="sec-label-num">6</span>
           <span className="sec-label-line" />
           Why TGN Studios
@@ -64,7 +64,7 @@ export default function Why() {
           fontSize: 'clamp(38px, 4vw, 56px)',
           fontWeight: 300,
           lineHeight: 1.1,
-          color: '#1A1007',
+          color: '#3B2921',
         }}>
           Why Founders<br />Choose Us
         </h2>
@@ -74,7 +74,7 @@ export default function Why() {
         {items.map((item, i) => (
           <ScrollReveal key={item.title} delay={(i as 0 | 1 | 2 | 3)}>
             <div style={{ paddingLeft: '24px' }} className="why-item">
-              <div style={{ width: '64px', height: '64px', marginBottom: '24px', color: '#1A1007', opacity: 0.45 }}>
+              <div style={{ width: '64px', height: '64px', marginBottom: '24px', color: '#3B2921', opacity: 0.45 }}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.0" strokeLinecap="round" strokeLinejoin="round" style={{ width: '64px', height: '64px' }}>
                   {item.icon.props.children}
                 </svg>
@@ -85,7 +85,7 @@ export default function Why() {
                   fontFamily: 'var(--font-inter)',
                   fontSize: '17px',
                   fontWeight: 600,
-                  color: '#1A1007',
+                  color: '#3B2921',
                   marginBottom: '12px',
                   letterSpacing: '0.01em',
                   transition: 'color 0.25s ease',

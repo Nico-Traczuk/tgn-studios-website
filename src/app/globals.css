@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --dark:       #1A1007;
-  --dark-2:     #221408;
-  --cream:      #F0E8DA;
-  --cream-2:    #EDE2D4;
+  --dark:       #3B2921;
+  --dark-2:     #2E1E14;
+  --cream:      #E9E3D4;
+  --cream-2:    #DDD7C6;
   --stone:      #D9CEBB;
   --stone-2:    #C8BAA5;
   --muted:      #9B8B72;
   --muted-dark: #6A5A48;
-  --green-bg:   #2A3D22;
-  --red-bg:     #7A2020;
-  --olive-bg:   #1E3028;
-  --card-light: #F5EFE6;
-  --card-dark:  #241A0C;
+  --green-bg:   #485242;
+  --red-bg:     #7E4639;
+  --olive-bg:   #485242;
+  --card-light: #F0EAE0;
+  --card-dark:  #2E1E14;
 }
 
 html {
@@ -246,16 +246,16 @@ body {
 }
 .pkg-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(26,16,7,0.12);
+  box-shadow: 0 16px 48px rgba(59,41,33,0.12);
 }
 
 /* ── Why item hover ── */
 .why-item {
-  border-left: 1px solid rgba(26,16,7,0.15);
+  border-left: 1px solid rgba(59,41,33,0.15);
   transition: border-color 0.25s ease;
 }
-.why-item:hover { border-left-color: rgba(26,16,7,0.38); }
-.why-item:hover .why-title { color: #1A1007; }
+.why-item:hover { border-left-color: rgba(59,41,33,0.38); }
+.why-item:hover .why-title { color: #3B2921; }
 
 /* ── Focus visible ── */
 :focus-visible {
@@ -398,7 +398,7 @@ body {
 
 /* ── Slide compositions ── */
 .slide-1 {
-  background: linear-gradient(155deg, #2E1E0E 0%, #1A1007 60%, #0F0A04 100%);
+  background: linear-gradient(155deg, #4A3020 0%, #3B2921 60%, #2A1E14 100%);
 }
 .slide-1::before {
   content: '';
@@ -418,7 +418,7 @@ body {
   transform: translateX(-50%) rotate(-3deg);
 }
 .slide-2 {
-  background: linear-gradient(135deg, #1E1A10 0%, #2A1E0C 40%, #1A1007 100%);
+  background: linear-gradient(135deg, #3A2E1E 0%, #4A3828 40%, #3B2921 100%);
 }
 .slide-2::before {
   content: '';
@@ -430,7 +430,7 @@ body {
   transform: rotate(4deg);
 }
 .slide-3 {
-  background: linear-gradient(170deg, #251508 0%, #1A1007 50%, #2A1E0A 100%);
+  background: linear-gradient(170deg, #3D2A18 0%, #3B2921 50%, #3B2A18 100%);
 }
 .slide-3::before {
   content: '';
@@ -445,7 +445,7 @@ body {
   border-radius: 2px;
 }
 .slide-4 {
-  background: linear-gradient(120deg, #1A1007 0%, #2E200C 60%, #1A0F05 100%);
+  background: linear-gradient(120deg, #3B2921 0%, #4A3318 60%, #2E1E0D 100%);
 }
 .slide-4::before {
   content: '';

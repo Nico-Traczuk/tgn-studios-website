@@ -6,7 +6,7 @@ export default function Partners() {
     <section
       id="partners"
       style={{
-        background: '#1A1007',
+        background: '#3B2921',
         padding: '90px 48px',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',

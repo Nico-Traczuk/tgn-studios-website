@@ -56,7 +56,7 @@ export default function Nav() {
     <nav
       aria-label="Main navigation"
       style={{
-        background: 'rgba(26,16,7,0.97)',
+        background: 'rgba(59,41,33,0.97)',
         boxShadow: scrolled ? '0 1px 40px rgba(0,0,0,0.4)' : '0 1px 0 rgba(240,232,218,0.08)',
         borderBottom: 'none',
       }}
@@ -65,15 +65,9 @@ export default function Nav() {
       {/* Main bar */}
       <div className="flex items-center justify-between px-5 md:px-12 h-14 md:h-16">
         {/* Logo */}
-        <Link href="#hero" className="flex items-center gap-[10px] no-underline" onClick={closeMenu}>
-          <div
-            style={{ border: '1.5px solid rgba(240,232,218,0.6)', color: 'var(--cream)', fontFamily: 'var(--font-cormorant)' }}
-            className="w-[46px] h-9 rounded-sm flex items-center justify-center text-[13px] tracking-[0.05em]"
-          >
-            TGN
-          </div>
-          <div style={{ color: 'rgba(240,232,218,0.75)' }} className="text-[10px] font-medium tracking-[0.14em] uppercase leading-[1.4]">
-            TGN<br />Studios
+        <Link href="#hero" className="flex items-center no-underline" onClick={closeMenu}>
+          <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
+            <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '198px', height: 'auto', marginLeft: '-16px', marginTop: '-47px' }} />
           </div>
         </Link>
 
@@ -126,7 +120,7 @@ export default function Nav() {
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(26,16,7,0.98)',
+          background: 'rgba(59,41,33,0.98)',
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'all' : 'none',
           transition: 'opacity 0.3s ease',
@@ -138,16 +132,10 @@ export default function Nav() {
       >
         {/* Top bar inside overlay: logo + close button */}
         <div className="flex items-center justify-between px-5 h-14 flex-shrink-0">
-          <Link href="#hero" className="flex items-center gap-[10px] no-underline" onClick={closeMenu}>
-            <div
-              style={{ border: '1.5px solid rgba(240,232,218,0.6)', color: 'var(--cream)', fontFamily: 'var(--font-cormorant)' }}
-              className="w-[46px] h-9 rounded-sm flex items-center justify-center text-[13px] tracking-[0.05em]"
-            >
-              TGN
-            </div>
-            <div style={{ color: 'rgba(240,232,218,0.75)' }} className="text-[10px] font-medium tracking-[0.14em] uppercase leading-[1.4]">
-              TGN<br />Studios
-            </div>
+          <Link href="#hero" className="flex items-center no-underline" onClick={closeMenu}>
+            <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
+            <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '198px', height: 'auto', marginLeft: '-16px', marginTop: '-47px' }} />
+          </div>
           </Link>
           <button
             onClick={closeMenu}

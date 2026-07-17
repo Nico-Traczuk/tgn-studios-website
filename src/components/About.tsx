@@ -16,7 +16,7 @@ export default function About() {
       }}
     >
       <ScrollReveal>
-        <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
+        <div className="sec-label" style={{ color: 'rgba(59,41,33,0.4)' }}>
           <span className="sec-label-num">2</span>
           <span className="sec-label-line" />
           About

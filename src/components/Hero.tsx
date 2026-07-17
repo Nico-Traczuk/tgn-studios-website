@@ -76,7 +76,7 @@ export default function Hero() {
       </div>
 
       {/* Right — carousel */}
-      <div className="hero-slide-in relative h-[340px] md:h-[580px] rounded-sm overflow-hidden">
+      <div className="hero-slide-in relative h-[340px] md:h-[580px] rounded-sm overflow-hidden" style={{ display: 'none' }}>
         {slides.map((s, i) => (
           <div key={s.cls} className={`slide ${s.cls} ${i === current ? 'active' : ''}`}>
             <span

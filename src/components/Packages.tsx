@@ -31,7 +31,7 @@ export default function Packages() {
       }}
     >
       <ScrollReveal>
-        <div className="sec-label" style={{ color: 'rgba(26,16,7,0.4)' }}>
+        <div className="sec-label" style={{ color: 'rgba(59,41,33,0.4)' }}>
           <span className="sec-label-num">4</span>
           <span className="sec-label-line" />
           Packages
@@ -41,14 +41,14 @@ export default function Packages() {
           fontSize: 'clamp(50px, 5.2vw, 74px)',
           fontWeight: 300,
           lineHeight: 1.05,
-          color: '#1A1007',
+          color: '#3B2921',
           letterSpacing: '-0.01em',
         }}>
           Designed for<br />Every Stage
         </h2>
       </ScrollReveal>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px', background: 'rgba(26,16,7,0.08)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px', background: 'rgba(59,41,33,0.08)' }}>
         {packages.map((pkg, i) => (
           <ScrollReveal key={pkg.name} delay={(i > 0 ? i + 1 : 0) as 0 | 1 | 2 | 3}>
             <div
@@ -56,13 +56,13 @@ export default function Packages() {
               className="pkg-card"
             >
               <div style={{ fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9B8B72', marginBottom: '6px' }}>Starting at</div>
-              <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '38px', fontWeight: 400, color: '#1A1007', marginBottom: '4px' }}>{pkg.name}</div>
-              <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '54px', fontWeight: 300, color: '#1A1007', lineHeight: 1.05, marginBottom: '12px' }}>
+              <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '38px', fontWeight: 400, color: '#3B2921', marginBottom: '4px' }}>{pkg.name}</div>
+              <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '54px', fontWeight: 300, color: '#3B2921', lineHeight: 1.05, marginBottom: '12px' }}>
                 <sup style={{ fontSize: '18px', fontFamily: 'var(--font-inter)', fontWeight: 300, opacity: 0.45, verticalAlign: 'super', marginRight: '2px' }}>$</sup>
                 {pkg.price}
               </div>
               <p style={{ fontSize: '16px', color: '#7A6A58', lineHeight: 1.75, marginBottom: '24px' }}>{pkg.desc}</p>
-              <div style={{ height: '1px', background: 'rgba(26,16,7,0.08)', marginBottom: '20px' }} />
+              <div style={{ height: '1px', background: 'rgba(59,41,33,0.08)', marginBottom: '20px' }} />
               <div style={{ fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9B8B72', marginBottom: '14px' }}>Includes</div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '9px' }}>
                 {pkg.items.map((item) => (
