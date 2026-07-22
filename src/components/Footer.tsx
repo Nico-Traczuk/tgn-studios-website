@@ -3,6 +3,8 @@ import Link from 'next/link';
 const links = [
   { label: 'TGN Ventures',  href: 'https://tgnventures.vc', external: true },
   { label: 'TGN Community', href: 'https://app.ourloop.life/loop/the-good-news-founder-community', external: true },
+  { label: 'Portfolio',     href: '/portfolio', external: false },
+  { label: 'Careers',       href: '/careers', external: false },
   { label: 'TGN Studios',   href: '/', external: false },
 ];
 
