@@ -1,16 +1,28 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
-  { label: 'About',      href: '#about' },
-  { label: 'Services',   href: '#studio' },
-  { label: 'Packages',   href: '#packages' },
-  { label: 'Our Studio', href: '#partners' },
-  { label: 'Philosophy', href: '#philosophy' },
+  { label: 'About',      href: '/#about' },
+  { label: 'Services',   href: '/#studio' },
+  { label: 'Packages',   href: '/#packages' },
+  { label: 'Our Studio', href: '/#partners' },
+  { label: 'Philosophy', href: '/#philosophy' },
+  { label: 'Portfolio',  href: '/portfolio' },
+  { label: 'Careers',    href: '/careers' },
 ];
 
+function isPageLink(href: string) {
+  return !href.includes('#');
+}
+
+function getSectionId(href: string) {
+  return href.split('#')[1] ?? '';
+}
+
 export default function Nav() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -22,11 +34,14 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
-    const ids = links.map(l => l.href.slice(1));
+    const sectionIds = links
+      .filter((l) => !isPageLink(l.href))
+      .map((l) => getSectionId(l.href));
+
     const track = () => {
       if (window.scrollY < 80) { setActiveSection(''); return; }
       let active = '';
-      for (const id of ids) {
+      for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) active = id;
       }
@@ -37,13 +52,11 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', track);
   }, []);
 
-  // Lock body scroll when overlay is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Close on Escape key
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false); };
     window.addEventListener('keydown', onKey);
@@ -51,6 +64,11 @@ export default function Nav() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+
+  function isActive(href: string) {
+    if (isPageLink(href)) return pathname === href;
+    return activeSection === getSectionId(href);
+  }
 
   return (
     <nav
@@ -65,7 +83,7 @@ export default function Nav() {
       {/* Main bar */}
       <div className="flex items-center justify-between px-5 md:px-12 h-14 md:h-16">
         {/* Logo */}
-        <Link href="#hero" className="flex items-center no-underline" onClick={closeMenu}>
+        <Link href="/" className="flex items-center no-underline" onClick={closeMenu}>
           <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
             <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '198px', height: 'auto', marginLeft: '-16px', marginTop: '-47px' }} />
           </div>
@@ -78,14 +96,14 @@ export default function Nav() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className={`nav-link text-[12.5px] font-normal tracking-[0.02em]${activeSection === l.href.slice(1) ? ' active' : ''}`}
+                  className={`nav-link text-[12.5px] font-normal tracking-[0.02em]${isActive(l.href) ? ' active' : ''}`}
                 >
                   {l.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <Link href="#book" className="btn-cta">
+          <Link href="/#book" className="btn-cta">
             Schedule a Call →
           </Link>
         </div>
@@ -130,12 +148,12 @@ export default function Nav() {
         }}
         className="md:hidden"
       >
-        {/* Top bar inside overlay: logo + close button */}
+        {/* Top bar inside overlay */}
         <div className="flex items-center justify-between px-5 h-14 flex-shrink-0">
-          <Link href="#hero" className="flex items-center no-underline" onClick={closeMenu}>
+          <Link href="/" className="flex items-center no-underline" onClick={closeMenu}>
             <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
-            <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '198px', height: 'auto', marginLeft: '-16px', marginTop: '-47px' }} />
-          </div>
+              <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '198px', height: 'auto', marginLeft: '-16px', marginTop: '-47px' }} />
+            </div>
           </Link>
           <button
             onClick={closeMenu}
@@ -156,7 +174,7 @@ export default function Nav() {
               href={l.href}
               onClick={closeMenu}
               style={{
-                color: activeSection === l.href.slice(1) ? 'rgba(240,232,218,0.96)' : 'rgba(240,232,218,0.65)',
+                color: isActive(l.href) ? 'rgba(240,232,218,0.96)' : 'rgba(240,232,218,0.65)',
                 borderBottom: '1px solid rgba(240,232,218,0.05)',
                 transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
                 opacity: menuOpen ? 1 : 0,
@@ -171,11 +189,11 @@ export default function Nav() {
             style={{
               transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
               opacity: menuOpen ? 1 : 0,
-              transition: `transform 0.35s ease 0.35s, opacity 0.35s ease 0.35s`,
+              transition: `transform 0.35s ease ${links.length * 0.05 + 0.1}s, opacity 0.35s ease ${links.length * 0.05 + 0.1}s`,
             }}
             className="px-6 py-5"
           >
-            <Link href="#book" className="btn-cta w-full justify-center" onClick={closeMenu}>
+            <Link href="/#book" className="btn-cta w-full justify-center" onClick={closeMenu}>
               Schedule a Call →
             </Link>
           </div>
