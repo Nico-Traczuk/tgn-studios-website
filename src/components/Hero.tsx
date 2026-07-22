@@ -22,7 +22,7 @@ export default function Hero() {
     <section
       id="hero"
       style={{ background: 'var(--dark)' }}
-      className="min-h-screen grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-16 px-6 md:px-12 pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden"
+      className="min-h-screen grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-10 md:gap-16 px-6 md:px-12 md:pt-24 pb-10 md:pb-16 overflow-hidden"
     >
       {/* Left */}
       <div className="relative z-[2]">
