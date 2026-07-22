@@ -184,7 +184,7 @@ export default function Careers() {
               meeting exceptional people.
             </p>
             <a
-              href="mailto:hello@tgnstudios.com"
+              href="mailto:amadeu@tgnstudio.vc,darrel@tgnventures.vc"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
