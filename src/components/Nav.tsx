@@ -178,7 +178,7 @@ export default function Nav() {
                 borderBottom: '1px solid rgba(240,232,218,0.05)',
                 transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
                 opacity: menuOpen ? 1 : 0,
-                transition: `transform 0.35s ease ${i * 0.05 + 0.1}s, opacity 0.35s ease ${i * 0.05 + 0.1}s`,
+                transition: `transform 0.35s ease ${+(i * 0.05 + 0.1).toFixed(3)}s, opacity 0.35s ease ${+(i * 0.05 + 0.1).toFixed(3)}s`,
               }}
               className="px-6 py-5 text-[15px] tracking-[0.02em] no-underline"
             >
@@ -189,7 +189,7 @@ export default function Nav() {
             style={{
               transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
               opacity: menuOpen ? 1 : 0,
-              transition: `transform 0.35s ease ${links.length * 0.05 + 0.1}s, opacity 0.35s ease ${links.length * 0.05 + 0.1}s`,
+              transition: `transform 0.35s ease ${+(links.length * 0.05 + 0.1).toFixed(3)}s, opacity 0.35s ease ${+(links.length * 0.05 + 0.1).toFixed(3)}s`,
             }}
             className="px-6 py-5"
           >
