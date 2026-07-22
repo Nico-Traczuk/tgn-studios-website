@@ -84,9 +84,7 @@ export default function Nav() {
       <div className="flex items-center justify-between px-5 md:px-12 h-14 md:h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center no-underline" onClick={closeMenu}>
-          <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
-            <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '146px', height: 'auto', marginLeft: '0px', marginTop: '-36px' }} />
-          </div>
+          <img src="/tgn-logo-full.png" alt="TGN Studios" style={{ height: '38px', width: 'auto', display: 'block' }} />
         </Link>
 
         {/* Desktop: links + CTA */}
@@ -151,9 +149,7 @@ export default function Nav() {
         {/* Top bar inside overlay */}
         <div className="flex items-center justify-between px-5 h-14 flex-shrink-0">
           <Link href="/" className="flex items-center no-underline" onClick={closeMenu}>
-            <div style={{ width: '146px', height: '56px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
-              <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '146px', height: 'auto', marginLeft: '0px', marginTop: '-36px' }} />
-            </div>
+            <img src="/tgn-logo-full.png" alt="TGN Studios" style={{ height: '38px', width: 'auto', display: 'block' }} />
           </Link>
           <button
             onClick={closeMenu}
