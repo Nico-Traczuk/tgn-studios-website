@@ -27,7 +27,7 @@ export default function Footer() {
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div style={{ width: '120px', height: '48px', overflow: 'hidden', borderRadius: '2px', flexShrink: 0 }}>
-          <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '162px', height: 'auto', marginLeft: '-13px', marginTop: '-39px' }} />
+          <img src="/tgn-logo.jpg" alt="TGN Studios" style={{ width: '120px', height: 'auto', marginLeft: '0px', marginTop: '-30px' }} />
         </div>
         <div>
           <div style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(240,232,218,0.55)' }}>
