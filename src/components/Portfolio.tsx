@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import ScrollReveal from './ScrollReveal';
 
 const companies = [
@@ -21,7 +22,7 @@ const companies = [
   },
 ];
 
-const tagStyle: React.CSSProperties = {
+const tagStyle: CSSProperties = {
   fontSize: '10px',
   fontWeight: 500,
   letterSpacing: '0.1em',
@@ -31,7 +32,7 @@ const tagStyle: React.CSSProperties = {
   color: 'var(--muted-dark)',
 };
 
-const visitLinkStyle: React.CSSProperties = {
+const visitLinkStyle: CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
   gap: '8px',
@@ -48,6 +49,7 @@ const visitLinkStyle: React.CSSProperties = {
 export default function Portfolio() {
   return (
     <section
+      className="page-hero"
       style={{
         background: 'var(--dark)',
         paddingTop: '140px',
@@ -97,6 +99,7 @@ export default function Portfolio() {
 
       {/* Cards */}
       <div
+        id="portfolio-cards"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
@@ -169,6 +172,19 @@ export default function Portfolio() {
                 >
                   {c.name}
                 </div>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-cormorant)',
+                    fontSize: '18px',
+                    fontStyle: 'italic',
+                    fontWeight: 300,
+                    color: 'var(--muted-dark)',
+                    marginBottom: '12px',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {c.tagline}
+                </p>
                 <p
                   style={{
                     fontSize: '15px',
