@@ -394,6 +394,19 @@ body {
     flex-direction: column !important;
     gap: 14px !important;
   }
+
+  /* Portfolio */
+  #portfolio-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Portfolio + Careers hero */
+  .page-hero {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 100px !important;
+    padding-bottom: 64px !important;
+  }
 }
 
 /* ── Slide compositions ── */
