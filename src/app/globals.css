@@ -407,6 +407,45 @@ body {
     padding-top: 100px !important;
     padding-bottom: 64px !important;
   }
+
+  /* Referral steps */
+  #referral-steps {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Referral eligibility two-col */
+  #referral-eligibility {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Referral form rows */
+  .referral-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Referral teaser */
+  #referral {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  #referral > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+    padding: 32px 24px !important;
+  }
+}
+
+/* ── Referral form ── */
+.referral-form-row input::placeholder,
+.referral-form-row textarea::placeholder,
+#referral-form-contact::placeholder,
+textarea::placeholder {
+  color: rgba(240,232,218,0.2);
+}
+input::placeholder {
+  color: rgba(240,232,218,0.2);
 }
 
 /* ── Slide compositions ── */

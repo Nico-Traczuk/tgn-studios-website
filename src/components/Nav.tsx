@@ -10,6 +10,7 @@ const links = [
   { label: 'Our Studio', href: '/#partners' },
   { label: 'Philosophy', href: '/#philosophy' },
   { label: 'Portfolio',  href: '/portfolio' },
+  { label: 'Referral',   href: '/referral' },
   { label: 'Careers',    href: '/careers' },
 ];
 

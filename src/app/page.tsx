@@ -8,6 +8,7 @@ import Partners from '@/components/Partners';
 import Why from '@/components/Why';
 import Philosophy from '@/components/Philosophy';
 import BookCall from '@/components/BookCall';
+import ReferralTeaser from '@/components/ReferralTeaser';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
         <Why />
         <Philosophy />
         <BookCall />
+        <ReferralTeaser />
         <Footer />
       </main>
     </>
