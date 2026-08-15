@@ -58,10 +58,10 @@ export default function Hero() {
         <div className="hero-anim-4 flex flex-wrap gap-[14px] mb-6 md:mb-12">
           {BOOKING_URL ? (
             <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-cta">
-              Book a Discovery Call →
+              Submit Your Venture →
             </a>
           ) : (
-            <Link href="#book" className="btn-cta">Book a Discovery Call →</Link>
+            <Link href="#book" className="btn-cta">Submit Your Venture →</Link>
           )}
           <Link href="#studio" className="btn-secondary">View Services →</Link>
         </div>

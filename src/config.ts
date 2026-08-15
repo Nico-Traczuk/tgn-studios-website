@@ -1,3 +1,1 @@
-// TODO: Replace with the host's Google Calendar appointment scheduling link
-// Format: https://calendar.google.com/calendar/appointments/schedules/...
-export const BOOKING_URL = 'https://calendar.app.google/keLqh6Ekj9Ya5tQw5';
+export const BOOKING_URL = 'https://www.getvettable.com/tgn-ventures/invest/6SPJMW';

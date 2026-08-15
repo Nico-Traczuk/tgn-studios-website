@@ -50,11 +50,11 @@ export default function BookCall() {
             className="btn-cta"
             style={{ fontSize: '13px', padding: '14px 36px' }}
           >
-            Book a Discovery Call →
+            Submit Your Venture →
           </a>
         ) : (
           <Link href="#contact" className="btn-cta" style={{ fontSize: '13px', padding: '14px 36px' }}>
-            Book a Discovery Call →
+            Submit Your Venture →
           </Link>
         )}
       </ScrollReveal>
