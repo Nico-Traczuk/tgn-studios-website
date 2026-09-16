@@ -4,12 +4,13 @@ import ScrollReveal from './ScrollReveal';
 const companies = [
   {
     name: 'Loop',
-    tagline: 'A private space for your closest people.',
+    tagline: 'Your people are here.',
     description:
-      'No followers. No likes. Just connection. Loop is the home for the relationships that matter most.',
+      'A private, ad-free space to stay close to the people who matter. No followers, no feeds — just the relationships worth keeping.',
     tags: ['Community', 'App'],
     url: 'https://ourloop.life/',
     visual: 'screenshot' as const,
+    image: '/loop-preview.png',
   },
   {
     name: 'SereneOS',
@@ -19,6 +20,16 @@ const companies = [
     tags: ['Operations', 'Platform'],
     url: 'https://sereneos.co',
     visual: 'brand' as const,
+  },
+  {
+    name: 'RevWorx',
+    tagline: 'Realize your commercial goals.',
+    description:
+      'An AI-native commercialization platform for healthcare innovators — automating account targeting, prioritization, and outreach for medical device, diagnostics, and health tech companies.',
+    tags: ['HealthTech', 'AI'],
+    url: 'https://revworx.io/',
+    visual: 'screenshot' as const,
+    image: '/revworx-preview.jpg',
   },
 ];
 
@@ -108,7 +119,11 @@ export default function Portfolio() {
         }}
       >
         {companies.map((c, i) => (
-          <ScrollReveal key={c.name} delay={(i === 0 ? 0 : 1) as 0 | 1}>
+          <ScrollReveal
+            key={c.name}
+            delay={(i === 0 ? 0 : 1) as 0 | 1}
+            style={companies.length % 2 !== 0 && i === companies.length - 1 ? { gridColumn: '1 / -1' } : undefined}
+          >
             <div
               style={{ background: 'var(--card-light)', height: '100%' }}
               className="pkg-card"
@@ -117,8 +132,8 @@ export default function Portfolio() {
               <div style={{ height: '280px', overflow: 'hidden', position: 'relative' }}>
                 {c.visual === 'screenshot' ? (
                   <img
-                    src="/loop-preview.png"
-                    alt="Loop app homepage"
+                    src={c.image ?? ''}
+                    alt={`${c.name} preview`}
                     style={{
                       width: '100%',
                       height: '100%',

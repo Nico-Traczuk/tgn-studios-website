@@ -35,7 +35,7 @@ export default function Footer() {
             TGN Studios
           </div>
           <div style={{ fontSize: '10px', color: 'rgba(240,232,218,0.3)', marginTop: '3px' }}>
-            Branding · Product · Advisory · Part of the TGN Ecosystem
+            Product · Go-To-Market · Fundraising · Part of the TGN Ecosystem
           </div>
         </div>
       </div>

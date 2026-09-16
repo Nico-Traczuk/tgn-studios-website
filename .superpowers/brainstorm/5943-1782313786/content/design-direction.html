@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TGN Studios — Design Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark:    #1A1007;
+  --cream:   #F0E8DA;
+  --stone:   #D9CEBB;
+  --cream-2: #EDE2D4;
+  --muted:   #9B8B72;
+  --muted-d: #6A5A48;
+  --card:    #F5EFE6;
+}
+
+body {
+  background: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+  color: var(--cream);
+}
+
+/* ── LAYOUT: two columns, scroll independently ── */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.col {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+.col::-webkit-scrollbar { width: 3px; }
+.col::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+
+.col-label {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.col-label.before {
+  background: rgba(60,40,20,0.95);
+  color: rgba(240,232,218,0.5);
+  border-bottom: 1px solid rgba(240,232,218,0.07);
+}
+.col-label.after {
+  background: rgba(20,30,20,0.95);
+  color: rgba(180,220,180,0.7);
+  border-bottom: 1px solid rgba(180,220,180,0.12);
+}
+.col-label .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.col-label.before .dot { background: rgba(240,232,218,0.3); }
+.col-label.after .dot { background: #6aab6a; }
+
+/* divider */
+.divider {
+  width: 1px;
+  background: rgba(255,255,255,0.06);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* ════════════════════
+   BEFORE (current)
+════════════════════ */
+.before-site { background: var(--dark); }
+
+/* old sec label */
+.old-sec-label {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.old-sec-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1px solid currentColor; font-size: 9px; flex-shrink: 0;
+}
+.old-sec-line { display: block; width: 28px; height: 1px; background: currentColor; opacity: 0.45; }
+
+/* old hero */
+.old-hero {
+  background: var(--dark);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+  padding: 96px 48px 64px;
+  min-height: 100vh;
+}
+.old-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 300; line-height: 1.04;
+  color: var(--cream); margin-bottom: 24px;
+}
+.old-hero h1 em { font-style: italic; }
+.old-hero p {
+  font-size: 17px; color: rgba(240,232,218,0.6);
+  line-height: 1.8; margin-bottom: 32px; max-width: 380px;
+}
+.old-carousel {
+  height: 480px; border-radius: 2px;
+  background: linear-gradient(155deg,#2E1E0E 0%,#1A1007 60%,#0F0A04 100%);
+  position: relative; overflow: hidden;
+}
+.old-carousel::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px),
+              repeating-linear-gradient(0deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px);
+}
+.old-carousel::after {
+  content: ''; position: absolute;
+  bottom: 10%; left: 50%; width: 55%; height: 65%;
+  background: linear-gradient(160deg,#3A2A18 0%,#2A1E0E 100%);
+  box-shadow: -12px 12px 50px rgba(0,0,0,0.6);
+  border-radius: 2px; transform: translateX(-50%) rotate(-3deg);
+}
+.old-carousel-label {
+  position: absolute; bottom: 14px; left: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(240,232,218,0.35); z-index: 2;
+}
+.old-dots { position: absolute; bottom: 14px; right: 14px; display: flex; gap: 5px; z-index: 2; }
+.old-dots span { display: block; width: 5px; height: 5px; border-radius: 50%; background: rgba(240,232,218,0.25); }
+.old-dots span.on { background: var(--cream); }
+
+/* old about */
+.old-about {
+  background: var(--cream); padding: 110px 0 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr 0.65fr;
+  gap: 64px; align-items: start; overflow: hidden;
+}
+.old-about h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 58px; font-weight: 400; line-height: 1.08;
+  letter-spacing: -0.01em; color: var(--dark);
+  padding-bottom: 110px;
+}
+.old-about p { font-size: 16.5px; color: var(--muted-d); line-height: 1.9; margin-bottom: 18px; }
+.old-about-img {
+  align-self: stretch; min-height: 320px;
+  background: linear-gradient(160deg,#C4B49C 0%,#B8A88A 50%,#A89070 100%);
+  position: relative; overflow: hidden;
+}
+.old-about-img::after {
+  content: ''; position: absolute;
+  left: 30%; right: -20%; top: -5%; bottom: 0;
+  background: linear-gradient(160deg,#D4C4A8 0%,#C0AD90 40%,#A8967A 100%);
+  clip-path: polygon(10% 0%,90% 0%,100% 100%,0% 100%); opacity: 0.7;
+}
+
+/* old studio */
+.old-studio { background: var(--stone); padding: 110px 48px; }
+.old-studio h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px; font-weight: 300; line-height: 1.05;
+  color: var(--dark); letter-spacing: -0.01em; margin-bottom: 40px;
+}
+.old-cards {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 2px; background: rgba(26,16,7,0.1);
+}
+.old-card { background: #F5EFE6; padding: 36px 32px; }
+.old-card-head {
+  display: flex; align-items: center; gap: 16px;
+  padding-bottom: 22px; margin-bottom: 22px;
+  border-bottom: 1px solid rgba(26,16,7,0.1);
+}
+.old-card-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.old-card-icon svg { width: 22px; height: 22px; stroke: #F0E8DA; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.old-card-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--dark); }
+.old-card-lead { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.old-card-tag { font-size: 16px; color: var(--muted-d); line-height: 1.7; margin-bottom: 18px; }
+.old-card-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.old-card-list li { font-size: 15.5px; color: var(--muted-d); padding-left: 16px; position: relative; line-height: 1.5; }
+.old-card-list li::before { content: '•'; position: absolute; left: 0; color: var(--muted); font-size: 10px; top: 3px; }
+
+/* ════════════════════
+   AFTER (new direction)
+════════════════════ */
+.after-site { background: var(--dark); }
+
+/* NEW sec label — hairline + small caps, no circles */
+.new-sec-label {
+  display: flex; align-items: center; gap: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.new-sec-line-left { display: block; width: 40px; height: 1px; background: currentColor; opacity: 0.3; }
+.new-sec-label span { opacity: 0.5; }
+
+/* NEW hero */
+.new-hero {
+  background: var(--dark);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; align-items: center;
+  min-height: 100vh;
+}
+.new-hero-left { padding: 96px 48px 64px; }
+.new-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 76px; font-weight: 300; line-height: 1.0;
+  color: var(--cream); margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+.new-hero h1 em { font-style: italic; font-weight: 300; }
+.new-hero h1 strong {
+  font-style: italic; font-weight: 400;
+  color: var(--cream);
+}
+.new-hero p {
+  font-size: 16px; color: rgba(240,232,218,0.55);
+  line-height: 1.85; margin-bottom: 36px; max-width: 360px;
+}
+.new-hero-btns { display: flex; gap: 12px; margin-bottom: 48px; }
+
+/* Partner roster panel — replaces carousel */
+.new-hero-right {
+  height: 100%;
+  min-height: 100vh;
+  background: #221408;
+  border-left: 1px solid rgba(240,232,218,0.06);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 96px 40px;
+}
+.roster-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,232,218,0.3);
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.roster-label::after { content: ''; display: block; flex: 1; height: 1px; background: rgba(240,232,218,0.1); }
+
+.roster-item {
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(240,232,218,0.06);
+}
+.roster-item:first-of-type { border-top: 1px solid rgba(240,232,218,0.06); }
+
+.roster-discipline {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(240,232,218,0.3);
+  margin-bottom: 6px;
+}
+.roster-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 400; font-style: italic;
+  color: rgba(240,232,218,0.85); line-height: 1.1;
+}
+.roster-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; color: rgba(240,232,218,0.3);
+  margin-top: 4px; letter-spacing: 0.02em;
+}
+.roster-items {
+  margin-top: 10px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.roster-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.1em;
+  color: rgba(240,232,218,0.25);
+  border: 1px solid rgba(240,232,218,0.1);
+  padding: 3px 8px; border-radius: 2px;
+}
+
+/* NEW about */
+.new-about {
+  background: var(--cream);
+  padding: 110px 0 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr 0.65fr;
+  gap: 64px; align-items: start; overflow: hidden;
+}
+.new-about h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px; font-weight: 300; line-height: 1.06;
+  letter-spacing: -0.02em; color: var(--dark);
+  padding-bottom: 110px;
+}
+.new-about h2 em { font-style: italic; font-weight: 400; }
+.new-about p { font-size: 16px; color: var(--muted-d); line-height: 2.0; margin-bottom: 18px; }
+
+/* editorial margin rule — the signature */
+.margin-rule {
+  border-left: 1px solid rgba(26,16,7,0.15);
+  padding-left: 24px;
+}
+.new-about-img {
+  align-self: stretch; min-height: 320px;
+  background: linear-gradient(160deg,#C4B49C 0%,#B8A88A 50%,#A89070 100%);
+  position: relative; overflow: hidden;
+}
+.new-about-img::after {
+  content: ''; position: absolute;
+  left: 30%; right: -20%; top: -5%; bottom: 0;
+  background: linear-gradient(160deg,#D4C4A8 0%,#C0AD90 40%,#A8967A 100%);
+  clip-path: polygon(10% 0%,90% 0%,100% 100%,0% 100%); opacity: 0.7;
+}
+
+/* PULL QUOTE — the signature typographic moment */
+.pull-quote-section {
+  background: var(--dark);
+  padding: 80px 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-top: 1px solid rgba(240,232,218,0.06);
+  border-bottom: 1px solid rgba(240,232,218,0.06);
+}
+.pull-quote {
+  max-width: 640px; text-align: center;
+}
+.pull-quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 300; font-style: italic;
+  line-height: 1.15; letter-spacing: -0.01em;
+  color: rgba(240,232,218,0.88);
+  margin-bottom: 24px;
+}
+.pull-quote cite {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(240,232,218,0.3);
+  font-style: normal;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.pull-quote cite::before,
+.pull-quote cite::after {
+  content: ''; display: block; width: 28px; height: 1px;
+  background: rgba(240,232,218,0.2);
+}
+
+/* NEW studio */
+.new-studio { background: var(--stone); padding: 110px 48px; }
+.new-studio h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 62px; font-weight: 300; line-height: 1.03;
+  color: var(--dark); letter-spacing: -0.02em; margin-bottom: 48px;
+}
+.new-studio h2 em { font-style: italic; font-weight: 400; }
+.new-cards {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0;
+}
+.new-card {
+  padding: 36px 32px;
+  border-right: 1px solid rgba(26,16,7,0.08);
+}
+.new-card:last-child { border-right: none; }
+.new-card-discipline {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.new-card-discipline::before {
+  content: ''; display: block;
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.new-card:nth-child(1) .new-card-discipline::before { background: #2A3D22; }
+.new-card:nth-child(2) .new-card-discipline::before { background: #1E3028; }
+.new-card:nth-child(3) .new-card-discipline::before { background: #7A2020; }
+
+.new-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 300; font-style: italic;
+  color: var(--dark); line-height: 1.0; margin-bottom: 6px;
+}
+.new-card-lead { font-size: 12px; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.02em; }
+.new-card-divider { height: 1px; background: rgba(26,16,7,0.1); margin-bottom: 20px; }
+.new-card-tag { font-size: 15.5px; color: var(--muted-d); line-height: 1.75; margin-bottom: 20px; }
+.new-card-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.new-card-list li {
+  font-size: 14px; color: var(--muted-d);
+  padding-left: 0; display: flex; align-items: baseline; gap: 8px; line-height: 1.5;
+}
+.new-card-list li::before {
+  content: '—'; color: rgba(26,16,7,0.2);
+  font-size: 10px; flex-shrink: 0;
+}
+
+/* shared buttons */
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; background: var(--cream); color: var(--dark);
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.04em; text-decoration: none; white-space: nowrap;
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; background: transparent; color: rgba(240,232,218,0.75);
+  font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.04em;
+  border: 1px solid rgba(240,232,218,0.28); text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="compare">
+
+  <!-- ═══════════════ BEFORE ═══════════════ -->
+  <div class="col">
+    <div class="col-label before">
+      <div class="dot"></div>
+      Current design
+    </div>
+    <div class="before-site">
+
+      <!-- OLD HERO -->
+      <div class="old-hero">
+        <div>
+          <div class="old-sec-label" style="color:rgba(240,232,218,0.45)">
+            <span class="old-sec-num">①</span>
+            <span class="old-sec-line"></span>
+            Venture Studio
+          </div>
+          <h1 class="old-hero">TGN Studios<br/><em>Building What<br/>Endures</em></h1>
+          <p>We help founders launch companies through exceptional branding, product development, and strategic guidance.</p>
+          <div style="display:flex;gap:14px;margin-bottom:40px">
+            <a href="#" class="btn-cta">Start a Project →</a>
+            <a href="#" class="btn-secondary">View Services →</a>
+          </div>
+          <p style="font-style:italic;font-size:13px;color:rgba(240,232,218,0.35)">Built by founders, operators, and investors who understand what it takes to go from idea to launch.</p>
+        </div>
+        <div class="old-carousel">
+          <span class="old-carousel-label">Branding · Product · Advisory</span>
+          <div class="old-dots"><span class="on"></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <!-- OLD ABOUT -->
+      <div class="old-about">
+        <div>
+          <div class="old-sec-label" style="color:rgba(26,16,7,0.4)">
+            <span class="old-sec-num">②</span>
+            <span class="old-sec-line"></span>
+            About
+          </div>
+          <h2 class="old-about">More Than a<br/>Service Provider</h2>
+        </div>
+        <div style="padding-top:40px">
+          <p class="old-about">Most agencies sell deliverables. Most consultants sell advice.</p>
+          <p class="old-about">TGN Studios exists to help founders build meaningful businesses with the right team around them from day one.</p>
+        </div>
+        <div class="old-about-img"></div>
+      </div>
+
+      <!-- OLD STUDIO -->
+      <div class="old-studio">
+        <div class="old-sec-label" style="color:rgba(26,16,7,0.4)">
+          <span class="old-sec-num">③</span>
+          <span class="old-sec-line"></span>
+          Our Studio
+        </div>
+        <h2 class="old-studio">Three Disciplines.<br/>One Team.</h2>
+        <div class="old-cards">
+          <div class="old-card">
+            <div class="old-card-head">
+              <div class="old-card-icon" style="background:#2A3D22"><svg viewBox="0 0 24 24"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg></div>
+              <div><div class="old-card-name">Branding</div><div class="old-card-lead">Led by Tony & Co</div></div>
+            </div>
+            <p class="old-card-tag">Craft a brand worthy of the vision.</p>
+            <ul class="old-card-list"><li>Brand Strategy</li><li>Visual Identity</li><li>Websites</li><li>Pitch Deck Design</li></ul>
+          </div>
+          <div class="old-card">
+            <div class="old-card-head">
+              <div class="old-card-icon" style="background:#1E3028"><svg viewBox="0 0 24 24"><path d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg></div>
+              <div><div class="old-card-name">Product</div><div class="old-card-lead">Led by Amadeu Tolentino</div></div>
+            </div>
+            <p class="old-card-tag">Transform ideas into products people actually use.</p>
+            <ul class="old-card-list"><li>Product Design</li><li>MVP Development</li><li>AI Applications</li><li>Technical Strategy</li></ul>
+          </div>
+          <div class="old-card">
+            <div class="old-card-head">
+              <div class="old-card-icon" style="background:#7A2020"><svg viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
+              <div><div class="old-card-name">Advisory</div><div class="old-card-lead">Led by Darrel Frater</div></div>
+            </div>
+            <p class="old-card-tag">Navigate growth with experienced founders.</p>
+            <ul class="old-card-list"><li>Venture Readiness</li><li>Fundraising Prep</li><li>Growth Strategy</li><li>Partnerships</li></ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════ AFTER ═══════════════ -->
+  <div class="col">
+    <div class="col-label after">
+      <div class="dot"></div>
+      Proposed direction
+    </div>
+    <div class="after-site">
+
+      <!-- NEW HERO -->
+      <div class="new-hero">
+        <div class="new-hero-left">
+          <div class="new-sec-label" style="color:rgba(240,232,218,0.5)">
+            <span class="new-sec-line-left"></span>
+            <span>Venture Studio</span>
+          </div>
+          <h1>TGN Studios<br/><em>Building What<br/>Endures</em></h1>
+          <p>We help founders launch companies through exceptional branding, product development, and strategic guidance.</p>
+          <div class="new-hero-btns">
+            <a href="#" class="btn-cta">Start a Project →</a>
+            <a href="#" class="btn-secondary">View Services →</a>
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-style:italic;font-size:13px;color:rgba(240,232,218,0.3);line-height:1.7">Built by founders, operators, and investors who understand what it takes to go from idea to launch.</p>
+        </div>
+
+        <!-- PARTNER ROSTER replaces carousel -->
+        <div class="new-hero-right">
+          <div class="roster-label">Studio Partners</div>
+
+          <div class="roster-item">
+            <div class="roster-discipline">Branding</div>
+            <div class="roster-name">Tony & Co</div>
+            <div class="roster-role">Creative Direction</div>
+            <div class="roster-items">
+              <span class="roster-tag">Brand Strategy</span>
+              <span class="roster-tag">Visual Identity</span>
+              <span class="roster-tag">Websites</span>
+            </div>
+          </div>
+
+          <div class="roster-item">
+            <div class="roster-discipline">Product</div>
+            <div class="roster-name">Amadeu Tolentino</div>
+            <div class="roster-role">Product & Engineering</div>
+            <div class="roster-items">
+              <span class="roster-tag">MVP Development</span>
+              <span class="roster-tag">AI Applications</span>
+              <span class="roster-tag">Design</span>
+            </div>
+          </div>
+
+          <div class="roster-item">
+            <div class="roster-discipline">Advisory</div>
+            <div class="roster-name">Darrel Frater</div>
+            <div class="roster-role">Venture & Growth</div>
+            <div class="roster-items">
+              <span class="roster-tag">Fundraising</span>
+              <span class="roster-tag">Strategy</span>
+              <span class="roster-tag">Partnerships</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW ABOUT -->
+      <div class="new-about">
+        <div>
+          <div class="new-sec-label" style="color:rgba(26,16,7,0.45)">
+            <span class="new-sec-line-left" style="background:rgba(26,16,7,0.3)"></span>
+            <span>About</span>
+          </div>
+          <h2>More Than a<br/><em>Service Provider</em></h2>
+        </div>
+        <div class="margin-rule" style="padding-top:40px">
+          <p style="color:#6A5A48;font-size:16px;line-height:2.0;margin-bottom:18px">Most agencies sell deliverables. Most consultants sell advice.</p>
+          <p style="color:#6A5A48;font-size:16px;line-height:2.0">TGN Studios exists to help founders build meaningful businesses with the right team around them from day one.</p>
+        </div>
+        <div class="new-about-img"></div>
+      </div>
+
+      <!-- PULL QUOTE — signature moment -->
+      <div class="pull-quote-section">
+        <div class="pull-quote">
+          <blockquote>"Built by founders.<br/>For founders."</blockquote>
+          <cite>TGN Studios — The Good News Ecosystem</cite>
+        </div>
+      </div>
+
+      <!-- NEW STUDIO -->
+      <div class="new-studio">
+        <div class="new-sec-label" style="color:rgba(26,16,7,0.45);margin-bottom:16px">
+          <span class="new-sec-line-left" style="background:rgba(26,16,7,0.3)"></span>
+          <span>Our Studio</span>
+        </div>
+        <h2>Three Disciplines.<br/><em>One Team.</em></h2>
+        <div class="new-cards">
+          <div class="new-card">
+            <div class="new-card-discipline">Branding</div>
+            <div class="new-card-name">Tony & Co</div>
+            <div class="new-card-lead">Creative Direction</div>
+            <div class="new-card-divider"></div>
+            <p class="new-card-tag">Craft a brand worthy of the vision.</p>
+            <ul class="new-card-list">
+              <li>Brand Strategy</li><li>Visual Identity</li><li>Websites</li><li>Pitch Deck Design</li>
+            </ul>
+          </div>
+          <div class="new-card">
+            <div class="new-card-discipline">Product</div>
+            <div class="new-card-name">Amadeu Tolentino</div>
+            <div class="new-card-lead">Product & Engineering</div>
+            <div class="new-card-divider"></div>
+            <p class="new-card-tag">Transform ideas into products people actually use.</p>
+            <ul class="new-card-list">
+              <li>Product Design</li><li>MVP Development</li><li>AI Applications</li><li>Technical Strategy</li>
+            </ul>
+          </div>
+          <div class="new-card">
+            <div class="new-card-discipline">Advisory</div>
+            <div class="new-card-name">Darrel Frater</div>
+            <div class="new-card-lead">Venture & Growth</div>
+            <div class="new-card-divider"></div>
+            <p class="new-card-tag">Navigate growth with experienced founders and investors.</p>
+            <ul class="new-card-list">
+              <li>Venture Readiness</li><li>Fundraising Prep</li><li>Growth Strategy</li><li>Partnerships</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

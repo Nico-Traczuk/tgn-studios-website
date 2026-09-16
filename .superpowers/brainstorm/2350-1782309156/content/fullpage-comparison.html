@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TGN Studios — Desktop vs Mobile</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0d0d0d;
+  font-family: Georgia, serif;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(13,13,13,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 14px 24px;
+}
+.page-header .label {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.page-header .divider {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.15);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: 0;
+  min-height: calc(100vh - 52px);
+}
+
+/* ─── LEFT: DESKTOP ─── */
+.desktop-side {
+  border-right: 1px solid rgba(255,255,255,0.06);
+  overflow-y: auto;
+  max-height: calc(100vh - 52px);
+}
+.desktop-side::-webkit-scrollbar { width: 4px; }
+.desktop-side::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ─── RIGHT: MOBILE ─── */
+.mobile-side {
+  background: #111;
+  overflow-y: auto;
+  max-height: calc(100vh - 52px);
+}
+.mobile-side::-webkit-scrollbar { display: none; }
+
+/* ════════════════════════════════
+   SHARED DESIGN TOKENS
+════════════════════════════════ */
+:root {
+  --dark:    #1A1007;
+  --cream:   #F0E8DA;
+  --stone:   #D9CEBB;
+  --muted:   #9B8B72;
+  --muted-d: #6A5A48;
+}
+
+/* ════════════════════════════════
+   DESKTOP STYLES
+════════════════════════════════ */
+
+/* NAV desktop */
+.d-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(26,16,7,0.97);
+  border-bottom: 1px solid rgba(240,232,218,0.07);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+}
+.d-nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.d-logo-box {
+  border: 1.5px solid rgba(240,232,218,0.6); border-radius: 2px;
+  width: 46px; height: 36px; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; letter-spacing: 0.05em; color: #F0E8DA;
+}
+.d-logo-txt {
+  font-family: Arial,sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(240,232,218,0.75); line-height: 1.4;
+}
+.d-nav-links { display: flex; align-items: center; gap: 32px; }
+.d-nav-links ul { display: flex; gap: 28px; list-style: none; }
+.d-nav-links ul li a {
+  font-family: Arial,sans-serif; font-size: 12.5px; color: rgba(240,232,218,0.6);
+  text-decoration: none; letter-spacing: 0.02em;
+}
+
+/* HERO desktop */
+.d-hero {
+  background: #1A1007; padding: 96px 48px 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.d-hero h1 {
+  font-size: 72px; font-weight: 300; line-height: 1.04; letter-spacing: -0.01em;
+  color: #F0E8DA; margin-bottom: 24px;
+}
+.d-hero h1 em { font-style: italic; }
+.d-hero-body {
+  font-family: Arial,sans-serif; font-size: 17px; color: rgba(240,232,218,0.6);
+  line-height: 1.8; margin-bottom: 36px; max-width: 380px;
+}
+.d-hero-btns { display: flex; gap: 14px; margin-bottom: 40px; }
+.d-hero-slide {
+  height: 480px; border-radius: 2px; overflow: hidden;
+  background: linear-gradient(155deg, #2E1E0E 0%, #1A1007 60%, #0F0A04 100%);
+  position: relative;
+}
+.d-hero-slide::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px),
+              repeating-linear-gradient(0deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px);
+}
+.d-hero-slide::after {
+  content: '';
+  position: absolute; bottom: 10%; left: 50%;
+  width: 55%; height: 65%;
+  background: linear-gradient(160deg, #3A2A18 0%, #2A1E0E 100%);
+  box-shadow: -12px 12px 50px rgba(0,0,0,0.6);
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+/* ABOUT desktop */
+.d-about {
+  background: #F0E8DA; padding: 110px 0 0 48px; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr 0.65fr; gap: 64px; align-items: start;
+}
+.d-about h2 {
+  font-size: 58px; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em;
+  color: #1A1007; padding-bottom: 110px;
+}
+.d-about p { font-family: Arial,sans-serif; font-size: 16px; color: #6A5A48; line-height: 1.9; margin-bottom: 16px; }
+.d-about-img {
+  align-self: stretch; min-height: 320px;
+  background: linear-gradient(160deg,#C4B49C 0%,#B8A88A 50%,#A89070 100%);
+  position: relative; overflow: hidden;
+}
+.d-about-img::after {
+  content: ''; position: absolute;
+  left: 30%; right: -20%; top: -5%; bottom: 0;
+  background: linear-gradient(160deg,#D4C4A8 0%,#C0AD90 40%,#A8967A 100%);
+  clip-path: polygon(10% 0%,90% 0%,100% 100%,0% 100%); opacity: 0.7;
+}
+
+/* STUDIO desktop */
+.d-studio { background: #D9CEBB; padding: 110px 48px; }
+.d-studio h2 { font-size: 56px; font-weight: 300; line-height: 1.05; color: #1A1007; letter-spacing: -0.01em; margin-bottom: 40px; }
+.d-cards-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(26,16,7,0.1); }
+.d-disc-card { background: #F5EFE6; padding: 32px 28px; }
+.d-disc-head { display: flex; align-items: center; gap: 14px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid rgba(26,16,7,0.1); }
+.d-disc-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.d-disc-icon svg { width: 22px; height: 22px; stroke: #F0E8DA; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.d-disc-name { font-size: 28px; font-weight: 400; color: #1A1007; }
+.d-disc-lead { font-family: Arial,sans-serif; font-size: 14px; color: #9B8B72; margin-top: 3px; }
+.d-disc-tag { font-family: Arial,sans-serif; font-size: 15px; color: #6A5A48; line-height: 1.7; margin-bottom: 18px; }
+.d-disc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.d-disc-list li { font-family: Arial,sans-serif; font-size: 15px; color: #6A5A48; padding-left: 16px; position: relative; line-height: 1.5; }
+.d-disc-list li::before { content: '•'; position: absolute; left: 0; color: #9B8B72; font-size: 10px; top: 3px; }
+
+/* PACKAGES desktop */
+.d-packages {
+  background: #F0E8DA; padding: 110px 48px;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start;
+}
+.d-packages h2 { font-size: 64px; font-weight: 300; line-height: 1.05; color: #1A1007; letter-spacing: -0.01em; }
+.d-pkgs-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(26,16,7,0.08); }
+.d-pkg { padding: 30px 24px; }
+.d-pkg-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9B8B72; margin-bottom: 4px; }
+.d-pkg-name { font-size: 32px; font-weight: 400; color: #1A1007; margin-bottom: 2px; }
+.d-pkg-price { font-size: 46px; font-weight: 300; color: #1A1007; line-height: 1.05; margin-bottom: 10px; }
+.d-pkg-price sup { font-family: Arial,sans-serif; font-size: 14px; font-weight: 300; opacity: 0.45; vertical-align: super; margin-right: 2px; }
+.d-pkg-desc { font-family: Arial,sans-serif; font-size: 14px; color: #7A6A58; line-height: 1.75; margin-bottom: 18px; }
+.d-pkg-div { height: 1px; background: rgba(26,16,7,0.08); margin-bottom: 14px; }
+.d-pkg-inc { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9B8B72; margin-bottom: 12px; }
+.d-pkg-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.d-pkg-list li { font-family: Arial,sans-serif; font-size: 14px; color: #6A5A48; padding-left: 14px; position: relative; }
+.d-pkg-list li::before { content: '·'; position: absolute; left: 0; color: #9B8B72; }
+
+/* PARTNERS desktop */
+.d-partners {
+  background: #1A1007; padding: 90px 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  border-top: 1px solid rgba(240,232,218,0.05);
+}
+.d-partners h2 { font-size: 50px; font-weight: 300; line-height: 1.1; color: #F0E8DA; }
+.d-partners p { font-family: Arial,sans-serif; font-size: 16px; color: rgba(240,232,218,0.52); line-height: 1.9; margin-bottom: 14px; }
+
+/* WHY desktop */
+.d-why {
+  background: #EDE2D4; padding: 80px 48px;
+  display: grid; grid-template-columns: 1fr 3fr; gap: 64px; align-items: start;
+}
+.d-why h2 { font-size: 48px; font-weight: 300; line-height: 1.1; color: #1A1007; }
+.d-why-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+.d-why-item { padding-left: 20px; border-left: 1px solid rgba(26,16,7,0.15); }
+.d-why-icon { width: 52px; height: 52px; color: #1A1007; opacity: 0.45; margin-bottom: 18px; }
+.d-why-title { font-family: Arial,sans-serif; font-size: 16px; font-weight: 600; color: #1A1007; margin-bottom: 10px; letter-spacing: 0.01em; }
+.d-why-desc { font-family: Arial,sans-serif; font-size: 15px; color: #6A5A48; line-height: 1.85; }
+
+/* PHILOSOPHY desktop */
+.d-phil {
+  background: #D9CEBB; padding: 110px 0 0 48px; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr 0.65fr; gap: 64px; align-items: start;
+}
+.d-phil h2 { font-size: 52px; font-weight: 300; line-height: 1.1; color: #1A1007; letter-spacing: -0.01em; padding-bottom: 110px; }
+.d-phil p { font-family: Arial,sans-serif; font-size: 16px; color: #6A5A48; line-height: 1.9; }
+.d-phil-img {
+  align-self: stretch; min-height: 320px;
+  background: linear-gradient(160deg,#B8A888 0%,#A89470 50%,#907A58 100%);
+  position: relative; overflow: hidden;
+}
+.d-phil-img::after {
+  content: ''; position: absolute;
+  left: -10%; right: 0; bottom: 0; height: 65%;
+  background: linear-gradient(160deg,#9A8A6A 0%,#7A6A4A 50%,#6A5A3A 100%);
+  clip-path: polygon(0% 60%,25% 20%,45% 45%,65% 10%,85% 40%,100% 25%,100% 100%,0% 100%);
+  opacity: 0.75;
+}
+
+/* FOOTER desktop */
+.d-footer {
+  background: #1A1007; padding: 48px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: center;
+  border-top: 1px solid rgba(240,232,218,0.06);
+}
+.d-footer-logo { display: flex; align-items: center; gap: 12px; }
+.d-footer-logo-box {
+  width: 40px; height: 30px; border: 1.5px solid rgba(240,232,218,0.35);
+  border-radius: 2px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: 0.05em; color: #F0E8DA;
+}
+.d-footer-links { display: flex; gap: 22px; justify-content: center; list-style: none; }
+.d-footer-links a { font-family: Arial,sans-serif; font-size: 11px; color: rgba(240,232,218,0.38); text-decoration: none; letter-spacing: 0.04em; }
+.d-footer-cta { display: flex; justify-content: flex-end; }
+
+/* ════════════════════════════════
+   SHARED COMPONENTS (buttons, labels)
+════════════════════════════════ */
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; background: #F0E8DA; color: #1A1007;
+  font-family: Arial,sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.04em; text-decoration: none; white-space: nowrap;
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; background: transparent; color: rgba(240,232,218,0.75);
+  font-family: Arial,sans-serif; font-size: 12px; letter-spacing: 0.04em;
+  border: 1px solid rgba(240,232,218,0.28); text-decoration: none;
+}
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 22px; border: 1px solid rgba(240,232,218,0.28);
+  color: rgba(240,232,218,0.8); font-family: Arial,sans-serif;
+  font-size: 12px; letter-spacing: 0.05em; text-decoration: none;
+}
+.sec-label {
+  display: flex; align-items: center; gap: 8px;
+  font-family: Arial,sans-serif; font-size: 9px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 20px;
+}
+.sec-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%; border: 1px solid currentColor;
+  font-size: 8px; flex-shrink: 0;
+}
+.sec-line { display: block; width: 22px; height: 1px; background: currentColor; opacity: 0.45; }
+
+/* ════════════════════════════════
+   MOBILE STYLES
+════════════════════════════════ */
+.mobile-side { background: #1A1007; }
+
+/* NAV mobile */
+.m-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(26,16,7,0.97);
+  border-bottom: 1px solid rgba(240,232,218,0.07);
+}
+.m-nav-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+}
+.m-nav-logo { display: flex; align-items: center; gap: 8px; }
+.m-logo-box {
+  border: 1.5px solid rgba(240,232,218,0.6); border-radius: 2px;
+  width: 38px; height: 28px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: 0.05em; color: #F0E8DA;
+}
+.m-logo-txt {
+  font-family: Arial,sans-serif; font-size: 9px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(240,232,218,0.75); line-height: 1.4;
+}
+.m-hamburger { display: flex; flex-direction: column; gap: 5px; }
+.m-hamburger span { display: block; height: 1.5px; background: rgba(240,232,218,0.75); }
+.m-hamburger span:nth-child(1) { width: 20px; }
+.m-hamburger span:nth-child(2) { width: 14px; }
+.m-hamburger span:nth-child(3) { width: 20px; }
+.m-nav-dropdown {
+  border-top: 1px solid rgba(240,232,218,0.07);
+  display: flex; flex-direction: column;
+}
+.m-nav-dropdown a {
+  display: block; padding: 14px 20px;
+  font-family: Arial,sans-serif; font-size: 13px;
+  color: rgba(240,232,218,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(240,232,218,0.05);
+  letter-spacing: 0.02em;
+}
+.m-nav-cta { padding: 14px 20px; }
+.m-nav-cta .btn-cta { width: 100%; justify-content: center; }
+
+/* HERO mobile */
+.m-hero { background: #1A1007; padding: 36px 24px 28px; }
+.m-hero h1 { font-size: 40px; font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: #F0E8DA; margin-bottom: 18px; }
+.m-hero h1 em { font-style: italic; }
+.m-hero p { font-family: Arial,sans-serif; font-size: 15px; color: rgba(240,232,218,0.6); line-height: 1.8; margin-bottom: 22px; }
+.m-hero-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.m-hero-slide {
+  height: 240px; border-radius: 2px; overflow: hidden; position: relative;
+  background: linear-gradient(155deg,#2E1E0E 0%,#1A1007 60%,#0F0A04 100%);
+}
+.m-hero-slide::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px),
+              repeating-linear-gradient(0deg,rgba(240,232,218,0.02) 0px,rgba(240,232,218,0.02) 1px,transparent 1px,transparent 60px);
+}
+.m-hero-slide::after {
+  content: ''; position: absolute; bottom: 10%; left: 50%;
+  width: 55%; height: 65%;
+  background: linear-gradient(160deg,#3A2A18 0%,#2A1E0E 100%);
+  box-shadow: -12px 12px 50px rgba(0,0,0,0.6); border-radius: 2px;
+  transform: translateX(-50%) rotate(-3deg);
+}
+.m-slide-label { position: absolute; bottom: 12px; left: 12px; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,232,218,0.3); z-index: 2; }
+.m-dots { position: absolute; bottom: 12px; right: 12px; display: flex; gap: 4px; z-index: 2; }
+.m-dots span { display: block; width: 4px; height: 4px; border-radius: 50%; background: rgba(240,232,218,0.25); }
+.m-dots span.on { background: #F0E8DA; transform: scale(1.3); }
+
+/* ABOUT mobile */
+.m-about { background: #F0E8DA; padding: 64px 24px 0; overflow: hidden; }
+.m-about h2 { font-size: 36px; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; color: #1A1007; margin-bottom: 24px; }
+.m-about p { font-family: Arial,sans-serif; font-size: 15px; color: #6A5A48; line-height: 1.9; margin-bottom: 14px; }
+.m-about-img {
+  width: calc(100% + 48px); margin-left: -24px; height: 200px; margin-top: 32px;
+  background: linear-gradient(160deg,#C4B49C 0%,#B8A88A 50%,#A89070 100%);
+  position: relative; overflow: hidden;
+}
+.m-about-img::after {
+  content: ''; position: absolute;
+  left: 30%; right: -20%; top: -5%; bottom: 0;
+  background: linear-gradient(160deg,#D4C4A8 0%,#C0AD90 40%,#A8967A 100%);
+  clip-path: polygon(10% 0%,90% 0%,100% 100%,0% 100%); opacity: 0.7;
+}
+
+/* STUDIO mobile */
+.m-studio { background: #D9CEBB; padding: 64px 24px; }
+.m-studio h2 { font-size: 34px; font-weight: 300; line-height: 1.05; color: #1A1007; letter-spacing: -0.01em; margin-bottom: 24px; }
+.m-cards-1 { display: flex; flex-direction: column; gap: 2px; }
+.m-disc-card { background: #F5EFE6; padding: 24px 20px; }
+.m-disc-head { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid rgba(26,16,7,0.1); }
+.m-disc-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.m-disc-icon svg { width: 18px; height: 18px; stroke: #F0E8DA; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.m-disc-name { font-size: 24px; font-weight: 400; color: #1A1007; }
+.m-disc-lead { font-family: Arial,sans-serif; font-size: 12px; color: #9B8B72; margin-top: 2px; }
+.m-disc-tag { font-family: Arial,sans-serif; font-size: 14px; color: #6A5A48; line-height: 1.7; margin-bottom: 14px; }
+.m-disc-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.m-disc-list li { font-family: Arial,sans-serif; font-size: 13px; color: #6A5A48; padding-left: 14px; position: relative; line-height: 1.5; }
+.m-disc-list li::before { content: '•'; position: absolute; left: 0; color: #9B8B72; font-size: 9px; top: 2px; }
+
+/* PACKAGES mobile */
+.m-packages { background: #F0E8DA; padding: 64px 24px; }
+.m-packages h2 { font-size: 40px; font-weight: 300; line-height: 1.05; color: #1A1007; letter-spacing: -0.01em; margin-bottom: 24px; }
+.m-pkg { padding: 24px 20px; margin-bottom: 2px; background: #FAF5EE; }
+.m-pkg.mvp { background: #E8DDD0; }
+.m-pkg-label { font-family: Arial,sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9B8B72; margin-bottom: 3px; }
+.m-pkg-name { font-size: 28px; font-weight: 400; color: #1A1007; margin-bottom: 2px; }
+.m-pkg-price { font-size: 42px; font-weight: 300; color: #1A1007; line-height: 1.05; margin-bottom: 8px; }
+.m-pkg-price sup { font-family: Arial,sans-serif; font-size: 13px; font-weight: 300; opacity: 0.45; vertical-align: super; margin-right: 2px; }
+.m-pkg-desc { font-family: Arial,sans-serif; font-size: 13px; color: #7A6A58; line-height: 1.75; margin-bottom: 16px; }
+.m-pkg-div { height: 1px; background: rgba(26,16,7,0.08); margin-bottom: 14px; }
+.m-pkg-inc { font-family: Arial,sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9B8B72; margin-bottom: 10px; }
+.m-pkg-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.m-pkg-list li { font-family: Arial,sans-serif; font-size: 13px; color: #6A5A48; padding-left: 12px; position: relative; }
+.m-pkg-list li::before { content: '·'; position: absolute; left: 0; color: #9B8B72; }
+
+/* PARTNERS mobile */
+.m-partners { background: #1A1007; padding: 64px 24px; border-top: 1px solid rgba(240,232,218,0.05); }
+.m-partners h2 { font-size: 32px; font-weight: 300; line-height: 1.1; color: #F0E8DA; margin-bottom: 20px; }
+.m-partners p { font-family: Arial,sans-serif; font-size: 14px; color: rgba(240,232,218,0.52); line-height: 1.9; margin-bottom: 12px; }
+
+/* WHY mobile */
+.m-why { background: #EDE2D4; padding: 60px 24px; }
+.m-why h2 { font-size: 30px; font-weight: 300; line-height: 1.1; color: #1A1007; margin-bottom: 28px; }
+.m-why-list { display: flex; flex-direction: column; gap: 26px; }
+.m-why-item { padding-left: 18px; border-left: 1px solid rgba(26,16,7,0.15); }
+.m-why-icon { width: 40px; height: 40px; color: #1A1007; opacity: 0.45; margin-bottom: 12px; }
+.m-why-title { font-family: Arial,sans-serif; font-size: 15px; font-weight: 600; color: #1A1007; margin-bottom: 6px; letter-spacing: 0.01em; }
+.m-why-desc { font-family: Arial,sans-serif; font-size: 13px; color: #6A5A48; line-height: 1.85; }
+
+/* PHILOSOPHY mobile */
+.m-phil { background: #D9CEBB; padding: 64px 24px 0; overflow: hidden; }
+.m-phil h2 { font-size: 34px; font-weight: 300; line-height: 1.1; color: #1A1007; letter-spacing: -0.01em; margin-bottom: 24px; }
+.m-phil p { font-family: Arial,sans-serif; font-size: 14px; color: #6A5A48; line-height: 1.9; }
+.m-phil-img {
+  width: calc(100% + 48px); margin-left: -24px; height: 180px; margin-top: 36px;
+  background: linear-gradient(160deg,#B8A888 0%,#A89470 50%,#907A58 100%);
+  position: relative; overflow: hidden;
+}
+.m-phil-img::after {
+  content: ''; position: absolute; left: -10%; right: 0; bottom: 0; height: 65%;
+  background: linear-gradient(160deg,#9A8A6A 0%,#7A6A4A 50%,#6A5A3A 100%);
+  clip-path: polygon(0% 60%,25% 20%,45% 45%,65% 10%,85% 40%,100% 25%,100% 100%,0% 100%);
+  opacity: 0.75;
+}
+
+/* FOOTER mobile */
+.m-footer {
+  background: #1A1007; padding: 40px 24px 32px;
+  border-top: 1px solid rgba(240,232,218,0.06);
+  display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center;
+}
+.m-footer-logo { display: flex; align-items: center; gap: 10px; }
+.m-footer-box {
+  width: 36px; height: 28px; border: 1.5px solid rgba(240,232,218,0.35); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; letter-spacing: 0.05em; color: #F0E8DA;
+}
+.m-footer-txt div:first-child { font-family: Arial,sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,232,218,0.55); }
+.m-footer-txt div:last-child { font-family: Arial,sans-serif; font-size: 9px; color: rgba(240,232,218,0.3); margin-top: 2px; }
+.m-footer-links { display: flex; flex-wrap: wrap; gap: 12px 16px; justify-content: center; list-style: none; }
+.m-footer-links a { font-family: Arial,sans-serif; font-size: 10px; color: rgba(240,232,218,0.38); text-decoration: none; letter-spacing: 0.04em; }
+.m-footer-cta { width: 100%; }
+.m-footer-cta .btn-cta { width: 100%; justify-content: center; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="label">Desktop</span>
+  <span class="divider">↔</span>
+  <span class="label">Mobile (390px)</span>
+</div>
+
+<div class="split">
+
+  <!-- ══════════════════════════════
+       LEFT — DESKTOP
+  ══════════════════════════════ -->
+  <div class="desktop-side">
+
+    <!-- NAV -->
+    <div class="d-nav">
+      <a href="#" class="d-nav-logo">
+        <div class="d-logo-box">TGN</div>
+        <div class="d-logo-txt">TGN<br/>Studios</div>
+      </a>
+      <div class="d-nav-links">
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Packages</a></li>
+          <li><a href="#">Our Studio</a></li>
+          <li><a href="#">Philosophy</a></li>
+        </ul>
+        <a href="#" class="btn-cta">Start a Project →</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="d-hero">
+      <div>
+        <div class="sec-label" style="color:rgba(240,232,218,0.45)"><span class="sec-num">①</span><span class="sec-line"></span>Venture Studio</div>
+        <h1>TGN Studios<br/><em>Building What<br/>Endures</em></h1>
+        <p class="d-hero-body">We help founders launch companies through exceptional branding, product development, and strategic guidance — bringing institutional-quality execution to early-stage builders.</p>
+        <div class="d-hero-btns">
+          <a href="#" class="btn-cta">Start a Project →</a>
+          <a href="#" class="btn-secondary">View Services →</a>
+        </div>
+      </div>
+      <div class="d-hero-slide"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="d-about">
+      <div>
+        <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">②</span><span class="sec-line"></span>About</div>
+        <h2>More Than a<br/>Service Provider</h2>
+      </div>
+      <div style="padding-top:40px">
+        <p>Most agencies sell deliverables. Most consultants sell advice.</p>
+        <p>TGN Studios exists to help founders build meaningful businesses with the right team around them from day one.</p>
+      </div>
+      <div class="d-about-img"></div>
+    </div>
+
+    <!-- STUDIO -->
+    <div class="d-studio">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">③</span><span class="sec-line"></span>Our Studio</div>
+      <h2>Three Disciplines.<br/>One Team.</h2>
+      <div class="d-cards-3">
+        <div class="d-disc-card">
+          <div class="d-disc-head">
+            <div class="d-disc-icon" style="background:#2A3D22"><svg viewBox="0 0 24 24"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg></div>
+            <div><div class="d-disc-name">Branding</div><div class="d-disc-lead">Led by Tony & Co</div></div>
+          </div>
+          <p class="d-disc-tag">Craft a brand worthy of the vision.</p>
+          <ul class="d-disc-list"><li>Brand Strategy</li><li>Visual Identity</li><li>Websites</li><li>Pitch Deck Design</li><li>Marketing Assets</li></ul>
+        </div>
+        <div class="d-disc-card">
+          <div class="d-disc-head">
+            <div class="d-disc-icon" style="background:#1E3028"><svg viewBox="0 0 24 24"><path d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg></div>
+            <div><div class="d-disc-name">Product</div><div class="d-disc-lead">Led by Amadeu Tolentino</div></div>
+          </div>
+          <p class="d-disc-tag">Transform ideas into products people actually use.</p>
+          <ul class="d-disc-list"><li>Product Design</li><li>MVP Development</li><li>AI Applications</li><li>No-Code Builds</li><li>Technical Strategy</li></ul>
+        </div>
+        <div class="d-disc-card">
+          <div class="d-disc-head">
+            <div class="d-disc-icon" style="background:#7A2020"><svg viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
+            <div><div class="d-disc-name">Advisory</div><div class="d-disc-lead">Led by Darrel Frater</div></div>
+          </div>
+          <p class="d-disc-tag">Navigate growth with experienced founders.</p>
+          <ul class="d-disc-list"><li>Venture Readiness</li><li>Fundraising Prep</li><li>Growth Strategy</li><li>Partnerships</li><li>Investor Guidance</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="d-packages">
+      <div>
+        <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">④</span><span class="sec-line"></span>Packages</div>
+        <h2>Designed for<br/>Every Stage</h2>
+      </div>
+      <div class="d-pkgs-3">
+        <div class="d-pkg" style="background:#FAF5EE">
+          <div class="d-pkg-label">Starting at</div><div class="d-pkg-name">Foundation</div>
+          <div class="d-pkg-price"><sup>$</sup>2,500</div>
+          <p class="d-pkg-desc">For founders turning ideas into plans.</p>
+          <div class="d-pkg-div"></div><div class="d-pkg-inc">Includes</div>
+          <ul class="d-pkg-list"><li>Brand Discovery</li><li>Founder Strategy Session</li><li>MVP Roadmap</li><li>Launch Plan</li></ul>
+        </div>
+        <div class="d-pkg" style="background:#FAF5EE">
+          <div class="d-pkg-label">Starting at</div><div class="d-pkg-name">Launch</div>
+          <div class="d-pkg-price"><sup>$</sup>7,500</div>
+          <p class="d-pkg-desc">For founders preparing to validate.</p>
+          <div class="d-pkg-div"></div><div class="d-pkg-inc">Includes</div>
+          <ul class="d-pkg-list"><li>Brand Identity</li><li>Landing Page</li><li>Product Prototype</li><li>Discovery Framework</li></ul>
+        </div>
+        <div class="d-pkg" style="background:#E8DDD0">
+          <div class="d-pkg-label">Starting at</div><div class="d-pkg-name">MVP</div>
+          <div class="d-pkg-price"><sup>$</sup>15,000</div>
+          <p class="d-pkg-desc">For founders ready to build.</p>
+          <div class="d-pkg-div"></div><div class="d-pkg-inc">Includes</div>
+          <ul class="d-pkg-list"><li>Product Design</li><li>Functional MVP</li><li>Investor Materials</li><li>Go-To-Market Planning</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="d-partners">
+      <div>
+        <div class="sec-label" style="color:rgba(240,232,218,0.45)"><span class="sec-num">⑤</span><span class="sec-line"></span>Studio Partners</div>
+        <h2>We Occasionally Build<br/>Alongside Founders</h2>
+      </div>
+      <div>
+        <p>For a select number of companies each year, TGN Studios offers flexible engagement structures that may include a combination of services, advisory support, and long-term alignment.</p>
+        <p>We reserve these partnerships for founders building businesses with exceptional potential and strong alignment with our values.</p>
+        <a href="#" class="btn-outline">Inquire About Partnership →</a>
+      </div>
+    </div>
+
+    <!-- WHY -->
+    <div class="d-why">
+      <div>
+        <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">⑥</span><span class="sec-line"></span>Why TGN Studios</div>
+        <h2>Why Founders<br/>Choose Us</h2>
+      </div>
+      <div class="d-why-4">
+        <div class="d-why-item">
+          <div class="d-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="52" height="52"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg></div>
+          <div class="d-why-title">Institutional Quality</div><p class="d-why-desc">Work that looks and feels world-class from day one.</p>
+        </div>
+        <div class="d-why-item">
+          <div class="d-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="52" height="52"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
+          <div class="d-why-title">Founder-Led</div><p class="d-why-desc">Built by operators who have launched companies and raised capital.</p>
+        </div>
+        <div class="d-why-item">
+          <div class="d-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="52" height="52"><path d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path d="M6 6h.008v.008H6V6Z"/></svg></div>
+          <div class="d-why-title">Fair Pricing</div><p class="d-why-desc">Exceptional execution without the overhead of large agencies.</p>
+        </div>
+        <div class="d-why-item">
+          <div class="d-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="52" height="52"><path d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></div>
+          <div class="d-why-title">Long-Term Thinking</div><p class="d-why-desc">We optimize for enduring businesses, not short-term trends.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHILOSOPHY -->
+    <div class="d-phil">
+      <div>
+        <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">⑦</span><span class="sec-line"></span>Philosophy</div>
+        <h2>Stewardship<br/>Over Hype</h2>
+      </div>
+      <div style="padding-top:40px">
+        <p>We believe building a company is an act of stewardship. Capital, talent, time, and opportunity are resources entrusted to founders. Our role is to help deploy those resources wisely.</p>
+      </div>
+      <div class="d-phil-img"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="d-footer">
+      <div class="d-footer-logo">
+        <div class="d-footer-logo-box">TGN</div>
+        <div>
+          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(240,232,218,0.55)">TGN Studios</div>
+          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(240,232,218,0.3);margin-top:2px">Branding · Product · Advisory</div>
+        </div>
+      </div>
+      <ul class="d-footer-links">
+        <li><a href="#">TGN Ventures</a></li><li><a href="#">TGN Community</a></li>
+        <li><a href="#">TGN Foundation</a></li><li><a href="#">TGN Studios</a></li>
+      </ul>
+      <div class="d-footer-cta"><a href="#" class="btn-cta">Schedule a Conversation →</a></div>
+    </div>
+
+  </div><!-- /desktop-side -->
+
+
+  <!-- ══════════════════════════════
+       RIGHT — MOBILE
+  ══════════════════════════════ -->
+  <div class="mobile-side">
+
+    <!-- NAV -->
+    <div class="m-nav">
+      <div class="m-nav-bar">
+        <div class="m-nav-logo">
+          <div class="m-logo-box">TGN</div>
+          <div class="m-logo-txt">TGN<br/>Studios</div>
+        </div>
+        <div class="m-hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="m-nav-dropdown">
+        <a href="#">About</a><a href="#">Services</a><a href="#">Packages</a>
+        <a href="#">Our Studio</a><a href="#">Philosophy</a>
+        <div class="m-nav-cta"><a href="#" class="btn-cta">Start a Project →</a></div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="m-hero">
+      <div class="sec-label" style="color:rgba(240,232,218,0.45)"><span class="sec-num">①</span><span class="sec-line"></span>Venture Studio</div>
+      <h1>TGN Studios<br/><em>Building What<br/>Endures</em></h1>
+      <p>We help founders launch companies through exceptional branding, product development, and strategic guidance.</p>
+      <div class="m-hero-btns">
+        <a href="#" class="btn-cta">Start a Project →</a>
+        <a href="#" class="btn-secondary">View Services →</a>
+      </div>
+      <div class="m-hero-slide">
+        <span class="m-slide-label">Branding · Product · Advisory</span>
+        <div class="m-dots"><span class="on"></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="m-about">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">②</span><span class="sec-line"></span>About</div>
+      <h2>More Than a<br/>Service Provider</h2>
+      <p>Most agencies sell deliverables. Most consultants sell advice.</p>
+      <p>TGN Studios exists to help founders build meaningful businesses with the right team around them from day one.</p>
+      <div class="m-about-img"></div>
+    </div>
+
+    <!-- STUDIO -->
+    <div class="m-studio">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">③</span><span class="sec-line"></span>Our Studio</div>
+      <h2>Three Disciplines.<br/>One Team.</h2>
+      <div class="m-cards-1">
+        <div class="m-disc-card">
+          <div class="m-disc-head">
+            <div class="m-disc-icon" style="background:#2A3D22"><svg viewBox="0 0 24 24"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg></div>
+            <div><div class="m-disc-name">Branding</div><div class="m-disc-lead">Led by Tony & Co</div></div>
+          </div>
+          <p class="m-disc-tag">Craft a brand worthy of the vision.</p>
+          <ul class="m-disc-list"><li>Brand Strategy</li><li>Visual Identity</li><li>Websites</li><li>Pitch Deck Design</li><li>Marketing Assets</li></ul>
+        </div>
+        <div class="m-disc-card">
+          <div class="m-disc-head">
+            <div class="m-disc-icon" style="background:#1E3028"><svg viewBox="0 0 24 24"><path d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg></div>
+            <div><div class="m-disc-name">Product</div><div class="m-disc-lead">Led by Amadeu Tolentino</div></div>
+          </div>
+          <p class="m-disc-tag">Transform ideas into products people actually use.</p>
+          <ul class="m-disc-list"><li>Product Design</li><li>MVP Development</li><li>AI Applications</li><li>No-Code Builds</li><li>Technical Strategy</li></ul>
+        </div>
+        <div class="m-disc-card">
+          <div class="m-disc-head">
+            <div class="m-disc-icon" style="background:#7A2020"><svg viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
+            <div><div class="m-disc-name">Advisory</div><div class="m-disc-lead">Led by Darrel Frater</div></div>
+          </div>
+          <p class="m-disc-tag">Navigate growth with experienced founders.</p>
+          <ul class="m-disc-list"><li>Venture Readiness</li><li>Fundraising Prep</li><li>Growth Strategy</li><li>Partnerships</li><li>Investor Guidance</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="m-packages">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">④</span><span class="sec-line"></span>Packages</div>
+      <h2>Designed for<br/>Every Stage</h2>
+      <div class="m-pkg"><div class="m-pkg-label">Starting at</div><div class="m-pkg-name">Foundation</div><div class="m-pkg-price"><sup>$</sup>2,500</div><p class="m-pkg-desc">For founders turning ideas into plans.</p><div class="m-pkg-div"></div><div class="m-pkg-inc">Includes</div><ul class="m-pkg-list"><li>Brand Discovery</li><li>Founder Strategy Session</li><li>MVP Roadmap</li><li>Launch Plan</li></ul></div>
+      <div class="m-pkg"><div class="m-pkg-label">Starting at</div><div class="m-pkg-name">Launch</div><div class="m-pkg-price"><sup>$</sup>7,500</div><p class="m-pkg-desc">For founders preparing to validate.</p><div class="m-pkg-div"></div><div class="m-pkg-inc">Includes</div><ul class="m-pkg-list"><li>Brand Identity</li><li>Landing Page</li><li>Product Prototype</li><li>Discovery Framework</li></ul></div>
+      <div class="m-pkg mvp"><div class="m-pkg-label">Starting at</div><div class="m-pkg-name">MVP</div><div class="m-pkg-price"><sup>$</sup>15,000</div><p class="m-pkg-desc">For founders ready to build.</p><div class="m-pkg-div"></div><div class="m-pkg-inc">Includes</div><ul class="m-pkg-list"><li>Product Design</li><li>Functional MVP</li><li>Investor Materials</li><li>Go-To-Market Planning</li></ul></div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="m-partners">
+      <div class="sec-label" style="color:rgba(240,232,218,0.45)"><span class="sec-num">⑤</span><span class="sec-line"></span>Studio Partners</div>
+      <h2>We Occasionally Build<br/>Alongside Founders</h2>
+      <p>For a select number of companies each year, TGN Studios offers flexible engagement structures including services, advisory support, and long-term alignment.</p>
+      <p>We reserve these partnerships for founders building businesses with exceptional potential.</p>
+      <a href="#" class="btn-outline">Inquire About Partnership →</a>
+    </div>
+
+    <!-- WHY -->
+    <div class="m-why">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">⑥</span><span class="sec-line"></span>Why TGN Studios</div>
+      <h2>Why Founders<br/>Choose Us</h2>
+      <div class="m-why-list">
+        <div class="m-why-item"><div class="m-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg></div><div class="m-why-title">Institutional Quality</div><p class="m-why-desc">Work that looks and feels world-class from day one.</p></div>
+        <div class="m-why-item"><div class="m-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div><div class="m-why-title">Founder-Led</div><p class="m-why-desc">Built by operators who have launched companies and raised capital.</p></div>
+        <div class="m-why-item"><div class="m-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path d="M6 6h.008v.008H6V6Z"/></svg></div><div class="m-why-title">Fair Pricing</div><p class="m-why-desc">Exceptional execution without the overhead of large agencies.</p></div>
+        <div class="m-why-item"><div class="m-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></div><div class="m-why-title">Long-Term Thinking</div><p class="m-why-desc">We optimize for enduring businesses, not short-term trends.</p></div>
+      </div>
+    </div>
+
+    <!-- PHILOSOPHY -->
+    <div class="m-phil">
+      <div class="sec-label" style="color:rgba(26,16,7,0.4)"><span class="sec-num">⑦</span><span class="sec-line"></span>Philosophy</div>
+      <h2>Stewardship<br/>Over Hype</h2>
+      <p>We believe building a company is an act of stewardship. Capital, talent, time, and opportunity are resources entrusted to founders. Our role is to help deploy those resources wisely.</p>
+      <div class="m-phil-img"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="m-footer">
+      <div class="m-footer-logo">
+        <div class="m-footer-box">TGN</div>
+        <div class="m-footer-txt">
+          <div>TGN Studios</div>
+          <div>Branding · Product · Advisory</div>
+        </div>
+      </div>
+      <ul class="m-footer-links">
+        <li><a href="#">TGN Ventures</a></li><li><a href="#">TGN Community</a></li>
+        <li><a href="#">TGN Foundation</a></li><li><a href="#">TGN Studios</a></li>
+      </ul>
+      <div class="m-footer-cta"><a href="#" class="btn-cta">Schedule a Conversation →</a></div>
+    </footer>
+
+  </div><!-- /mobile-side -->
+
+</div><!-- /split -->
+
+</body>
+</html>

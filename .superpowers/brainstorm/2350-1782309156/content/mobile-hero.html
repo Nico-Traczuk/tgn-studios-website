@@ -1,0 +1,135 @@
+<h2>Mobile Hero Layout</h2>
+<p class="subtitle">The hero goes from 2-column desktop to mobile. Which stacking order feels right?</p>
+
+<div class="cards">
+
+  <!-- Option A: Text first, image below -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1A1007;padding:0;overflow:hidden">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(240,232,218,0.08)">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="border:1px solid rgba(240,232,218,0.5);width:26px;height:18px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;color:#F0E8DA;font-family:serif">TGN</div>
+          <div style="font-size:6px;color:rgba(240,232,218,0.6);text-transform:uppercase;letter-spacing:0.1em;line-height:1.3">TGN<br/>Studios</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;width:14px">
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6);width:9px"></div>
+        </div>
+      </div>
+
+      <!-- Text block -->
+      <div style="padding:22px 16px 16px">
+        <div style="font-size:6px;color:rgba(240,232,218,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px">① Venture Studio</div>
+        <div style="font-family:serif;font-size:26px;color:#F0E8DA;font-weight:300;line-height:1.1;margin-bottom:10px">TGN Studios<br/><em>Building What<br/>Endures</em></div>
+        <div style="font-size:8px;color:rgba(240,232,218,0.55);line-height:1.75;margin-bottom:14px;max-width:220px">We help founders launch companies through exceptional branding, product development, and strategic guidance.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="padding:7px 12px;background:#F0E8DA;color:#1A1007;font-size:7px;font-weight:600;letter-spacing:0.04em">Start a Project →</div>
+          <div style="padding:7px 12px;border:1px solid rgba(240,232,218,0.25);color:rgba(240,232,218,0.7);font-size:7px;letter-spacing:0.04em">View Services →</div>
+        </div>
+      </div>
+
+      <!-- Image carousel below -->
+      <div style="height:160px;background:linear-gradient(155deg,#2E1E0E 0%,#1A1007 60%,#0F0A04 100%);position:relative;margin:0 16px 16px;border-radius:2px">
+        <div style="position:absolute;bottom:6px;left:8px;font-size:6px;color:rgba(240,232,218,0.3);letter-spacing:0.14em;text-transform:uppercase;font-family:serif">Branding · Product · Advisory</div>
+        <div style="position:absolute;bottom:6px;right:8px;display:flex;gap:4px">
+          <div style="width:4px;height:4px;border-radius:50%;background:#F0E8DA"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:rgba(240,232,218,0.25)"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:rgba(240,232,218,0.25)"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:rgba(240,232,218,0.25)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Text → Image (Recommended)</h3>
+      <p>Message first, visual below. Natural reading flow. User reads the headline before seeing the image. Most common for content-first brands.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Image first, text below -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1A1007;padding:0;overflow:hidden">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(240,232,218,0.08)">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="border:1px solid rgba(240,232,218,0.5);width:26px;height:18px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;color:#F0E8DA;font-family:serif">TGN</div>
+          <div style="font-size:6px;color:rgba(240,232,218,0.6);text-transform:uppercase;letter-spacing:0.1em;line-height:1.3">TGN<br/>Studios</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;width:14px">
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6);width:9px"></div>
+        </div>
+      </div>
+
+      <!-- Image carousel first -->
+      <div style="height:150px;background:linear-gradient(155deg,#2E1E0E 0%,#1A1007 60%,#0F0A04 100%);position:relative">
+        <div style="position:absolute;bottom:6px;left:8px;font-size:6px;color:rgba(240,232,218,0.3);letter-spacing:0.14em;text-transform:uppercase;font-family:serif">Branding · Product · Advisory</div>
+        <div style="position:absolute;bottom:6px;right:8px;display:flex;gap:4px">
+          <div style="width:4px;height:4px;border-radius:50%;background:#F0E8DA"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:rgba(240,232,218,0.25)"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:rgba(240,232,218,0.25)"></div>
+        </div>
+      </div>
+
+      <!-- Text block below -->
+      <div style="padding:16px">
+        <div style="font-size:6px;color:rgba(240,232,218,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px">① Venture Studio</div>
+        <div style="font-family:serif;font-size:20px;color:#F0E8DA;font-weight:300;line-height:1.1;margin-bottom:8px">TGN Studios<br/><em>Building What Endures</em></div>
+        <div style="font-size:7px;color:rgba(240,232,218,0.55);line-height:1.75;margin-bottom:10px">We help founders launch companies through exceptional branding and strategic guidance.</div>
+        <div style="display:flex;gap:8px">
+          <div style="padding:7px 12px;background:#F0E8DA;color:#1A1007;font-size:7px;font-weight:600">Start a Project →</div>
+          <div style="padding:7px 12px;border:1px solid rgba(240,232,218,0.25);color:rgba(240,232,218,0.7);font-size:7px">View Services →</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Image → Text</h3>
+      <p>Visual impact first, then the pitch. Creates a strong first impression before the headline lands. More editorial/magazine feel.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Full-bleed hero with text overlay -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1A1007;padding:0;overflow:hidden">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(240,232,218,0.08)">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="border:1px solid rgba(240,232,218,0.5);width:26px;height:18px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;color:#F0E8DA;font-family:serif">TGN</div>
+          <div style="font-size:6px;color:rgba(240,232,218,0.6);text-transform:uppercase;letter-spacing:0.1em;line-height:1.3">TGN<br/>Studios</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;width:14px">
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6)"></div>
+          <div style="height:1px;background:rgba(240,232,218,0.6);width:9px"></div>
+        </div>
+      </div>
+
+      <!-- Full-bleed image with overlay text -->
+      <div style="height:240px;background:linear-gradient(155deg,#2E1E0E 0%,#1A1007 60%,#0F0A04 100%);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:16px">
+        <!-- Gradient overlay -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(26,16,7,0.9) 0%, rgba(26,16,7,0.2) 60%, transparent 100%)"></div>
+        <!-- Text on image -->
+        <div style="position:relative;z-index:2">
+          <div style="font-size:6px;color:rgba(240,232,218,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px">① Venture Studio</div>
+          <div style="font-family:serif;font-size:20px;color:#F0E8DA;font-weight:300;line-height:1.1;margin-bottom:8px">TGN Studios<br/><em>Building What Endures</em></div>
+          <div style="display:flex;gap:6px">
+            <div style="padding:6px 10px;background:#F0E8DA;color:#1A1007;font-size:6px;font-weight:600">Start a Project →</div>
+            <div style="padding:6px 10px;border:1px solid rgba(240,232,218,0.25);color:rgba(240,232,218,0.7);font-size:6px">View Services →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtitle below -->
+      <div style="padding:10px 14px">
+        <div style="font-size:7px;color:rgba(240,232,218,0.45);line-height:1.75;font-style:italic">Built by founders, operators, and investors who understand what it takes to go from idea to launch.</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Full-Bleed Image + Text Overlay</h3>
+      <p>Text overlaid on the carousel image. Cinematic and space-efficient. The description line moves below. Hero takes full visual priority.</p>
+    </div>
+  </div>
+
+</div>

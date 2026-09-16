@@ -1,1 +1,1 @@
-export const BOOKING_URL = 'https://www.getvettable.com/tgn-ventures/invest/6SPJMW';
+export const BOOKING_URL = 'https://sereneos.co/f/8GsypOm5JXR0pkPTx2xheBrV1eYiitzm';

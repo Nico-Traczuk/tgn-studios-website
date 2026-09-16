@@ -1,0 +1,137 @@
+<h2>Mobile Card Sections</h2>
+<p class="subtitle">Studio has 3 cards, Why has 4 cards, Packages has 3 cards. How should they display on mobile?</p>
+
+<div class="cards">
+
+  <!-- Option A: 1 column stacked -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#D9CEBB;padding:14px;min-height:300px">
+      <!-- Section label -->
+      <div style="font-size:7px;color:rgba(26,16,7,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span style="border:1px solid currentColor;border-radius:50%;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;font-size:6px">③</span>
+        <span style="display:block;width:18px;height:1px;background:currentColor;opacity:0.45"></span>
+        Our Studio
+      </div>
+      <div style="font-family:serif;font-size:20px;color:#1A1007;font-weight:300;margin-bottom:12px">Three Disciplines.<br/>One Team.</div>
+      <!-- Cards stacked 1-col -->
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <div style="background:#F5EFE6;padding:14px;border-radius:1px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(26,16,7,0.08)">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2A3D22;flex-shrink:0"></div>
+            <div>
+              <div style="font-family:serif;font-size:14px;color:#1A1007">Branding</div>
+              <div style="font-size:7px;color:#9B8B72">Led by Tony & Co</div>
+            </div>
+          </div>
+          <div style="font-size:8px;color:#6A5A48;line-height:1.6">Craft a brand worthy of the vision.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:14px;border-radius:1px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(26,16,7,0.08)">
+            <div style="width:28px;height:28px;border-radius:50%;background:#1E3028;flex-shrink:0"></div>
+            <div>
+              <div style="font-family:serif;font-size:14px;color:#1A1007">Product</div>
+              <div style="font-size:7px;color:#9B8B72">Led by Amadeu Tolentino</div>
+            </div>
+          </div>
+          <div style="font-size:8px;color:#6A5A48;line-height:1.6">Transform ideas into products people actually use.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:14px;border-radius:1px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(26,16,7,0.08)">
+            <div style="width:28px;height:28px;border-radius:50%;background:#7A2020;flex-shrink:0"></div>
+            <div>
+              <div style="font-family:serif;font-size:14px;color:#1A1007">Advisory</div>
+              <div style="font-size:7px;color:#9B8B72">Led by Darrel Frater</div>
+            </div>
+          </div>
+          <div style="font-size:8px;color:#6A5A48;line-height:1.6">Navigate growth with experienced founders.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Single Column Stack (Recommended)</h3>
+      <p>All cards stack vertically, full width. Clean and readable. Each card gets full attention before scrolling to the next.</p>
+    </div>
+  </div>
+
+  <!-- Option B: 2-column grid on mobile -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#D9CEBB;padding:14px;min-height:300px">
+      <div style="font-size:7px;color:rgba(26,16,7,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span style="border:1px solid currentColor;border-radius:50%;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;font-size:6px">③</span>
+        <span style="display:block;width:18px;height:1px;background:currentColor;opacity:0.45"></span>
+        Our Studio
+      </div>
+      <div style="font-family:serif;font-size:20px;color:#1A1007;font-weight:300;margin-bottom:12px">Three Disciplines.<br/>One Team.</div>
+      <!-- 2-col grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+        <div style="background:#F5EFE6;padding:12px">
+          <div style="width:24px;height:24px;border-radius:50%;background:#2A3D22;margin-bottom:8px"></div>
+          <div style="font-family:serif;font-size:13px;color:#1A1007;margin-bottom:3px">Branding</div>
+          <div style="font-size:6px;color:#9B8B72;margin-bottom:6px">Led by Tony & Co</div>
+          <div style="font-size:7px;color:#6A5A48;line-height:1.5">Craft a brand worthy of the vision.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:12px">
+          <div style="width:24px;height:24px;border-radius:50%;background:#1E3028;margin-bottom:8px"></div>
+          <div style="font-family:serif;font-size:13px;color:#1A1007;margin-bottom:3px">Product</div>
+          <div style="font-size:6px;color:#9B8B72;margin-bottom:6px">Led by Amadeu</div>
+          <div style="font-size:7px;color:#6A5A48;line-height:1.5">Transform ideas into real products.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:12px;grid-column:1/-1">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:24px;height:24px;border-radius:50%;background:#7A2020;flex-shrink:0"></div>
+            <div>
+              <div style="font-family:serif;font-size:13px;color:#1A1007">Advisory</div>
+              <div style="font-size:6px;color:#9B8B72">Led by Darrel Frater</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — 2-Column on Mobile</h3>
+      <p>Two cards per row, third spans full width. More compact, shows more above the fold. Works well on larger phones (375px+).</p>
+    </div>
+  </div>
+
+  <!-- Option C: Horizontal scroll carousel -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#D9CEBB;padding:14px;min-height:300px;overflow:hidden">
+      <div style="font-size:7px;color:rgba(26,16,7,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span style="border:1px solid currentColor;border-radius:50%;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;font-size:6px">③</span>
+        <span style="display:block;width:18px;height:1px;background:currentColor;opacity:0.45"></span>
+        Our Studio
+      </div>
+      <div style="font-family:serif;font-size:20px;color:#1A1007;font-weight:300;margin-bottom:12px">Three Disciplines.<br/>One Team.</div>
+      <!-- Horizontal scroll mockup -->
+      <div style="display:flex;gap:8px;overflow:hidden;padding-bottom:8px">
+        <div style="background:#F5EFE6;padding:14px;min-width:160px;flex-shrink:0;border-radius:1px">
+          <div style="width:24px;height:24px;border-radius:50%;background:#2A3D22;margin-bottom:8px"></div>
+          <div style="font-family:serif;font-size:14px;color:#1A1007;margin-bottom:3px">Branding</div>
+          <div style="font-size:6px;color:#9B8B72;margin-bottom:6px">Led by Tony & Co</div>
+          <div style="font-size:7px;color:#6A5A48;line-height:1.5">Craft a brand worthy of the vision.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:14px;min-width:160px;flex-shrink:0;border-radius:1px;opacity:0.7">
+          <div style="width:24px;height:24px;border-radius:50%;background:#1E3028;margin-bottom:8px"></div>
+          <div style="font-family:serif;font-size:14px;color:#1A1007;margin-bottom:3px">Product</div>
+          <div style="font-size:6px;color:#9B8B72;margin-bottom:6px">Led by Amadeu</div>
+          <div style="font-size:7px;color:#6A5A48;line-height:1.5">Transform ideas into real products.</div>
+        </div>
+        <div style="background:#F5EFE6;padding:14px;min-width:160px;flex-shrink:0;border-radius:1px;opacity:0.4">
+          <div style="width:24px;height:24px;border-radius:50%;background:#7A2020;margin-bottom:8px"></div>
+          <div style="font-family:serif;font-size:14px;color:#1A1007;margin-bottom:3px">Advisory</div>
+        </div>
+      </div>
+      <!-- Scroll indicator dots -->
+      <div style="display:flex;justify-content:center;gap:4px;margin-top:8px">
+        <div style="width:16px;height:2px;background:#1A1007;border-radius:1px;opacity:0.5"></div>
+        <div style="width:6px;height:2px;background:#1A1007;border-radius:1px;opacity:0.2"></div>
+        <div style="width:6px;height:2px;background:#1A1007;border-radius:1px;opacity:0.2"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Horizontal Scroll</h3>
+      <p>Cards scroll horizontally like a carousel. Space-efficient and engaging, but users might miss cards. Works better on touch devices.</p>
+    </div>
+  </div>
+
+</div>
