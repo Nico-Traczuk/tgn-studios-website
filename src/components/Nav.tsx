@@ -10,6 +10,7 @@ const links = [
   { label: 'Our Studio', href: '/#partners' },
   { label: 'Philosophy', href: '/#philosophy' },
   { label: 'Portfolio',  href: '/portfolio' },
+  { label: 'Insights',   href: '/insights' },
   { label: 'Referral',   href: '/referral' },
   { label: 'Careers',    href: '/careers' },
 ];
@@ -67,7 +68,7 @@ export default function Nav() {
   const closeMenu = () => setMenuOpen(false);
 
   function isActive(href: string) {
-    if (isPageLink(href)) return pathname === href;
+    if (isPageLink(href)) return pathname === href || pathname.startsWith(`${href}/`);
     return activeSection === getSectionId(href);
   }
 
@@ -89,7 +90,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop: links + CTA */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden min-[1120px]:flex items-center gap-8">
           <ul className="flex gap-7 list-none m-0 p-0">
             {links.map((l) => (
               <li key={l.href}>
@@ -110,7 +111,7 @@ export default function Nav() {
         {/* Mobile: hamburger */}
         <button
           onClick={() => setMenuOpen((o) => !o)}
-          className="md:hidden flex flex-col gap-[5px] p-3 bg-transparent border-none cursor-pointer"
+          className="min-[1120px]:hidden flex flex-col gap-[5px] p-3 bg-transparent border-none cursor-pointer"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
@@ -145,7 +146,7 @@ export default function Nav() {
           display: 'flex',
           flexDirection: 'column',
         }}
-        className="md:hidden"
+        className="min-[1120px]:hidden"
       >
         {/* Top bar inside overlay */}
         <div className="flex items-center justify-between px-5 h-14 flex-shrink-0">
