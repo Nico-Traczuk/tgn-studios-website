@@ -5,7 +5,7 @@ import { BOOKING_URL } from '@/config';
 
 const slides = [
   { cls: 'slide-1', label: 'Branding · Product · Advisory' },
-  { cls: 'slide-2', label: 'Building What Endures' },
+  { cls: 'slide-2', label: 'Where Ambition Meets Impact' },
   { cls: 'slide-3', label: 'Institutional Quality' },
   { cls: 'slide-4', label: 'For Founders' },
 ];
@@ -36,23 +36,23 @@ export default function Hero() {
           className="hero-anim-2 font-light leading-[1.04] tracking-[-0.01em] mb-6"
           style={{
             fontFamily: 'var(--font-cormorant)',
-            fontSize: 'clamp(62px, 6.5vw, 96px)',
+            fontSize: 'clamp(52px, 5.4vw, 80px)',
             color: 'var(--cream)',
           }}
         >
           TGN Studios
           <br />
-          <em>Building What
-          <br />Endures</em>
+          <em>Where Ambition
+          <br />Meets Impact</em>
         </h1>
 
         <p
           className="hero-anim-3 font-light leading-[1.8] mb-6 md:mb-10"
-          style={{ fontSize: '18px', color: 'rgba(240,232,218,0.6)', maxWidth: '460px' }}
+          style={{ fontSize: '18px', color: 'rgba(240,232,218,0.6)', maxWidth: '520px' }}
         >
-          We help founders launch companies through exceptional branding, product
-          development, and strategic guidance — bringing institutional-quality
-          execution to early-stage builders.
+          We help founders turn ambitious ideas into impactful companies through
+          institutional-quality Product, Go-To-Market, and Fundraising — without
+          the institutional price tag.
         </p>
 
         <div className="hero-anim-4 flex flex-wrap gap-[14px] mb-6 md:mb-12">

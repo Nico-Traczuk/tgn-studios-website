@@ -18,9 +18,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "TGN Studios — Building What Endures",
+  title: "TGN Studios — Where Ambition Meets Impact",
   description:
-    "We help founders launch companies through exceptional branding, product development, and strategic guidance.",
+    "We help founders turn ambitious ideas into impactful companies through institutional-quality Product, Go-To-Market, and Fundraising — without the institutional price tag.",
 };
 
 export default function RootLayout({
