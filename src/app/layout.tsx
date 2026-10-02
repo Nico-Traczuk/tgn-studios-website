@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { SITE_URL } from "@/config";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -16,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "TGN Studios — Building What Endures",
   description:
     "We help founders launch companies through exceptional branding, product development, and strategic guidance.",

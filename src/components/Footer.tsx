@@ -4,6 +4,7 @@ const links = [
   { label: 'TGN Ventures',  href: 'https://tgnventures.vc', external: true },
   { label: 'TGN Community', href: 'https://app.ourloop.life/loop/the-good-news-founder-community', external: true },
   { label: 'Portfolio',     href: '/portfolio', external: false },
+  { label: 'Insights',      href: '/insights', external: false },
   { label: 'Referral',      href: '/referral', external: false },
   { label: 'Careers',       href: '/careers', external: false },
   { label: 'TGN Studios',   href: '/', external: false },
@@ -41,7 +42,7 @@ export default function Footer() {
       </div>
 
       {/* Links */}
-      <ul style={{ display: 'flex', gap: '22px', justifyContent: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
+      <ul style={{ display: 'flex', gap: '22px', rowGap: '12px', justifyContent: 'center', flexWrap: 'wrap', listStyle: 'none', margin: 0, padding: 0 }}>
         {links.map((l) => (
           <li key={l.label}>
             {l.external ? (
