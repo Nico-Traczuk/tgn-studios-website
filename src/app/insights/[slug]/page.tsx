@@ -15,7 +15,7 @@ export function generateStaticParams() {
   return getPublishedInsights().map((post) => ({ slug: post.slug }));
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

@@ -87,7 +87,7 @@ export default function InsightArticle({ post }: { post: Insight }) {
       </header>
 
       <div className="insight-article">
-        <InsightBody body={post.body} ctaHref={post.ctaHref} />
+        <InsightBody body={post.body} ctaHref={post.ctaHref} format={post.format} />
       </div>
     </article>
   );
