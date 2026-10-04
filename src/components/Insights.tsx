@@ -12,7 +12,7 @@ const tagStyle = {
   color: 'var(--muted-dark)',
 };
 
-export default function Insights({ posts }: { posts: Insight[] }) {
+export default function Insights({ posts, canEdit = false }: { posts: Insight[]; canEdit?: boolean }) {
   return (
     <section
       className="page-hero"
@@ -69,6 +69,7 @@ export default function Insights({ posts }: { posts: Insight[] }) {
               delay={(index === 0 ? 0 : 1) as 0 | 1}
               style={posts.length % 2 === 1 && index === posts.length - 1 ? { gridColumn: '1 / -1' } : undefined}
             >
+              <div className="insight-card-wrap">
               <Link href={`/insights/${post.slug}`} className="insight-card">
                 <div
                   style={{
@@ -130,6 +131,10 @@ export default function Insights({ posts }: { posts: Insight[] }) {
                   Read article →
                 </span>
               </Link>
+              {canEdit ? (
+                <Link href={`/write/${post.slug}`} className="insight-card-edit">Edit</Link>
+              ) : null}
+              </div>
             </ScrollReveal>
           ))}
         </div>

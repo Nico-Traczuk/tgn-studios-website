@@ -6,6 +6,7 @@ import InsightArticle from '@/components/InsightArticle';
 import Footer from '@/components/Footer';
 import { SITE_URL } from '@/config';
 import { getPublishedInsight, getPublishedInsights } from '@/lib/insights';
+import { getWriterSession } from '@/lib/writers';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -47,6 +48,7 @@ export default async function InsightPage({ params }: Props) {
   const { slug } = await params;
   const post = getPublishedInsight(slug);
   if (!post) notFound();
+  const writer = await getWriterSession();
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -79,7 +81,7 @@ export default async function InsightPage({ params }: Props) {
       <Nav />
       <ScrollProgress />
       <main>
-        <InsightArticle post={post} />
+        <InsightArticle post={post} editHref={writer ? `/write/${post.slug}` : undefined} />
         <Footer />
       </main>
     </>

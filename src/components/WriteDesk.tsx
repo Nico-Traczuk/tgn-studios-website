@@ -34,6 +34,7 @@ export default function WriteDesk({ name, posts }: { name: string; posts: PostCa
                   <em>
                     <time dateTime={post.date}>{formatInsightDate(post.date)}</time>
                     {post.draft ? ' · Draft' : ' · Published'}
+                    {' · Edit'}
                   </em>
                 </Link>
               </li>

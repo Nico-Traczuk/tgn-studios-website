@@ -2,7 +2,7 @@ import Link from 'next/link';
 import InsightBody from './InsightBody';
 import { formatInsightDate, type Insight } from '@/lib/insights';
 
-export default function InsightArticle({ post }: { post: Insight }) {
+export default function InsightArticle({ post, editHref }: { post: Insight; editHref?: string }) {
   return (
     <article>
       <header
@@ -16,9 +16,14 @@ export default function InsightArticle({ post }: { post: Insight }) {
         }}
       >
         <div style={{ maxWidth: '860px' }}>
-          <Link href="/insights" className="insight-back">
-            ← All insights
-          </Link>
+          <div className="insight-tools">
+            <Link href="/insights" className="insight-back">
+              ← All insights
+            </Link>
+            {editHref ? (
+              <Link href={editHref} className="insight-edit">Edit</Link>
+            ) : null}
+          </div>
           <div className="sec-label" style={{ color: 'rgba(240,232,218,0.45)' }}>
             <span className="sec-label-line" />
             {post.category}

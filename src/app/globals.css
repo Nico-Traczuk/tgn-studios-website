@@ -439,6 +439,10 @@ body {
   .insight-card {
     padding: 28px 24px !important;
   }
+  .insight-card-edit {
+    right: 24px;
+    bottom: 28px;
+  }
 
   /* Referral teaser */
   #referral {
@@ -523,11 +527,17 @@ input::placeholder {
 }
 
 /* ── Insights ── */
+.insight-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
 .insight-back {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  margin-bottom: 28px;
   color: rgba(240,232,218,0.55);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -535,6 +545,19 @@ input::placeholder {
   text-decoration: none;
 }
 .insight-back:hover { color: var(--cream); }
+.insight-edit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(240,232,218,0.28);
+  color: var(--cream);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.insight-edit:hover { border-color: rgba(240,232,218,0.55); }
 
 .insight-list {
   display: grid;
@@ -546,6 +569,10 @@ input::placeholder {
   .insight-list { grid-template-columns: 1fr 1fr; }
 }
 
+.insight-card-wrap {
+  position: relative;
+  height: 100%;
+}
 .insight-card {
   display: block;
   background: var(--card-light);
@@ -555,6 +582,23 @@ input::placeholder {
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.insight-card-edit {
+  position: absolute;
+  z-index: 2;
+  right: 40px;
+  bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 2px;
+  background: var(--card-light);
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.insight-card-edit:hover { color: var(--muted-dark); }
 .insight-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 48px rgba(59,41,33,0.12);
