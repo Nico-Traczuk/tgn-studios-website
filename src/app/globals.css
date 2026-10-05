@@ -727,6 +727,7 @@ input::placeholder {
   display: block;
 }
 
+.login-page { padding-top: 64px; }
 .write-login,
 .write-desk {
   min-height: 100vh;

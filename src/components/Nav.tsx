@@ -23,7 +23,7 @@ function getSectionId(href: string) {
   return href.split('#')[1] ?? '';
 }
 
-export default function Nav() {
+export default function Nav({ canWrite = false }: { canWrite?: boolean }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,6 +66,14 @@ export default function Nav() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  const insightIndex = links.findIndex((link) => link.href === '/insights');
+  const menuLinks = canWrite
+    ? [
+        ...links.slice(0, insightIndex + 1),
+        { label: 'Write blog', href: '/write' },
+        ...links.slice(insightIndex + 1),
+      ]
+    : links;
 
   function isActive(href: string) {
     if (isPageLink(href)) return pathname === href || pathname.startsWith(`${href}/`);
@@ -92,7 +100,7 @@ export default function Nav() {
         {/* Desktop: links + CTA */}
         <div className="hidden min-[1120px]:flex items-center gap-8">
           <ul className="flex gap-7 list-none m-0 p-0">
-            {links.map((l) => (
+            {menuLinks.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
@@ -166,7 +174,7 @@ export default function Nav() {
 
         {/* Links */}
         <div style={{ borderTop: '1px solid rgba(240,232,218,0.07)' }} className="flex flex-col flex-1">
-          {links.map((l, i) => (
+          {menuLinks.map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
@@ -187,7 +195,7 @@ export default function Nav() {
             style={{
               transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
               opacity: menuOpen ? 1 : 0,
-              transition: `transform 0.35s ease ${+(links.length * 0.05 + 0.1).toFixed(3)}s, opacity 0.35s ease ${+(links.length * 0.05 + 0.1).toFixed(3)}s`,
+              transition: `transform 0.35s ease ${+(menuLinks.length * 0.05 + 0.1).toFixed(3)}s, opacity 0.35s ease ${+(menuLinks.length * 0.05 + 0.1).toFixed(3)}s`,
             }}
             className="px-6 py-5"
           >

@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import WriteHeader from './WriteHeader';
 
-export default function WriteLogin({ configured }: { configured: boolean }) {
+export default function WriteLogin({ configured, nextPath = '/' }: { configured: boolean; nextPath?: string }) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,13 +25,12 @@ export default function WriteLogin({ configured }: { configured: boolean }) {
       setError(typeof data.error === 'string' ? data.error : 'Those details are not recognized.');
       return;
     }
+    router.push(nextPath);
     router.refresh();
   }
 
   return (
-    <div className="write-login">
-      <WriteHeader />
-      <form className="write-login-card" onSubmit={onSubmit}>
+    <form className="write-login-card" onSubmit={onSubmit}>
         <p className="write-kicker">Studio writing</p>
         <h1>Sign in to write</h1>
         <p>This desk is only for the two people who publish Insights.</p>
@@ -63,7 +61,6 @@ export default function WriteLogin({ configured }: { configured: boolean }) {
         <button className="btn-cta" type="submit" disabled={pending || !configured}>
           {pending ? 'Signing in…' : 'Sign in'}
         </button>
-      </form>
-    </div>
+    </form>
   );
 }

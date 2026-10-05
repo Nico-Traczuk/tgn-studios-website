@@ -30,7 +30,7 @@ export default function DeletePostButton({
     });
     const payload = await response.json().catch(() => ({}));
     if (response.status === 401) {
-      window.location.href = '/write';
+      window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}`;
       return;
     }
     if (!response.ok) {

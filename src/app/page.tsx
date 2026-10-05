@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav';
+import SiteNav from '@/components/SiteNav';
 import ScrollProgress from '@/components/ScrollProgress';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <>
-      <Nav />
+      <SiteNav />
       <ScrollProgress />
       <main>
         <Hero />
