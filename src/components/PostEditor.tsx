@@ -12,6 +12,7 @@ import { Table } from '@tiptap/extension-table';
 import { TableCell } from '@tiptap/extension-table-cell';
 import { TableHeader } from '@tiptap/extension-table-header';
 import { TableRow } from '@tiptap/extension-table-row';
+import DeletePostButton from './DeletePostButton';
 import WriteHeader from './WriteHeader';
 
 export type EditorDraft = {
@@ -255,6 +256,14 @@ export default function PostEditor({ writerName, initial }: { writerName: string
           <EditorContent editor={editor} />
 
           <div className="write-composer-bar">
+            {savedSlug ? (
+              <DeletePostButton
+                slug={savedSlug}
+                title={title || 'this post'}
+                className="is-danger"
+                onError={setError}
+              />
+            ) : null}
             {error ? <p className="write-error">{error}</p> : null}
             {status ? <p className="write-status">{status}</p> : null}
             <div>

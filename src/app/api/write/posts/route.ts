@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { BOOKING_URL } from '@/config';
 import { getInsight, isValidSlug } from '@/lib/insights';
-import { savePost } from '@/lib/post-store';
+import { deletePost, savePost } from '@/lib/post-store';
 import { htmlHasContent, sanitizePostHtml } from '@/lib/sanitize-post';
 import { getWriterSession } from '@/lib/writers';
 
@@ -102,6 +102,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ slug, draft, via });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'The post could not be saved.';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  const writer = await getWriterSession();
+  if (!writer) return NextResponse.json({ error: 'Sign in to delete a post.' }, { status: 401 });
+
+  const body = await request.json().catch(() => null) as { slug?: unknown } | null;
+  const slug = text(body?.slug);
+  if (!isValidSlug(slug) || slug === 'new') {
+    return NextResponse.json({ error: 'That post could not be found.' }, { status: 400 });
+  }
+  if (!getInsight(slug)) {
+    return NextResponse.json({ error: 'That post could not be found.' }, { status: 404 });
+  }
+
+  try {
+    const via = await deletePost(slug);
+    return NextResponse.json({ slug, via });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'The post could not be deleted.';
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -103,6 +103,33 @@ async function githubRemove(filePath: string, message: string) {
   if (!response.ok) throw new Error('GitHub did not remove the previous post file.');
 }
 
+export async function deletePost(slug: string) {
+  const filename = `${slug}.md`;
+  const repoPath = `content/insights/${filename}`;
+
+  if (usesGithub()) {
+    const config = githubConfig();
+    if (!config) throw new Error('Set GITHUB_TOKEN so posts can be deleted on the live site.');
+    const sha = await githubSha(config, repoPath);
+    if (!sha) throw new Error('That post is already gone.');
+    const response = await githubContents(config, repoPath, {
+      method: 'DELETE',
+      body: JSON.stringify({
+        message: `Delete insight: ${slug}`,
+        sha,
+        branch: config.branch,
+      }),
+    });
+    if (!response.ok) throw new Error('GitHub did not delete the post.');
+    return 'github' as const;
+  }
+
+  const file = path.join(INSIGHTS_DIR, filename);
+  if (!fs.existsSync(file)) throw new Error('That post is already gone.');
+  fs.unlinkSync(file);
+  return 'file' as const;
+}
+
 export async function savePost(post: StoredPost, previousSlug?: string) {
   const filename = `${post.slug}.md`;
   const contents = serializePost(post);

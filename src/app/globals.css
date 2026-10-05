@@ -846,15 +846,40 @@ input::placeholder {
   gap: 2px;
   background: rgba(240,232,218,0.06);
 }
+.write-post-list li {
+  display: flex;
+  align-items: stretch;
+  background: var(--card-light);
+}
 .write-post-list a {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 6px;
-  background: var(--card-light);
+  min-width: 0;
+  background: transparent;
   color: var(--dark);
   text-decoration: none;
   padding: 24px 28px;
 }
+.write-post-delete {
+  flex: none;
+  align-self: center;
+  margin-right: 20px;
+  border: 0;
+  background: transparent;
+  color: #7E4639;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0 8px;
+}
+.write-post-delete:hover { color: #5c2e24; }
+.write-post-delete:disabled { opacity: 0.55; cursor: default; }
 .write-post-list span,
 .write-post-list em {
   font-style: normal;
@@ -1060,6 +1085,12 @@ input::placeholder {
   border-color: #0079d3;
   color: #fff;
 }
+.write-composer-bar button.is-danger {
+  margin-right: auto;
+  color: #a33b32;
+  border-color: #e7c5c1;
+}
+.write-composer-bar button.is-danger:hover { background: #fdf6f5; }
 .write-composer-bar button:hover,
 .write-composer-bar a:hover { background: #f6f7f8; }
 .write-composer-bar button.is-primary:hover { background: #006cbf; }

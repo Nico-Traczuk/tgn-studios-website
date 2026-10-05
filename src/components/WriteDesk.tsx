@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DeletePostButton from './DeletePostButton';
 import WriteHeader from './WriteHeader';
 import { formatInsightDate } from '@/lib/insights';
 
@@ -37,6 +38,7 @@ export default function WriteDesk({ name, posts }: { name: string; posts: PostCa
                     {' · Edit'}
                   </em>
                 </Link>
+                <DeletePostButton slug={post.slug} title={post.title} className="write-post-delete" />
               </li>
             ))}
           </ul>
