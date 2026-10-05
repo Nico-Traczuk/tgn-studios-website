@@ -198,11 +198,15 @@ export function mergeInsights(files: Insight[], stored: Insight[], deleted: stri
 
 export async function getAllInsights() {
   const files = loadInsights();
-  if (!usesProjectStore() || !process.env.BLOB_READ_WRITE_TOKEN) return sortInsights(files);
+  if (!usesProjectStore()) return sortInsights(files);
 
-  const remote = await storedInsights();
-  const stored = remote.posts.map((item) => insightFromSource(item.source, item.fileName));
-  return mergeInsights(files, stored, remote.deleted);
+  try {
+    const remote = await storedInsights();
+    const stored = remote.posts.map((item) => insightFromSource(item.source, item.fileName));
+    return mergeInsights(files, stored, remote.deleted);
+  } catch {
+    return sortInsights(files);
+  }
 }
 
 export async function getInsight(slug: string) {

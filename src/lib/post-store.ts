@@ -42,10 +42,12 @@ export function usesProjectStore() {
   return process.env.VERCEL === '1';
 }
 
-function assertStore() {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    throw new Error('In Vercel, open Storage, create a Blob store, and connect it to this project. The site then saves posts itself.');
+function explainBlobError(error: unknown): never {
+  const message = error instanceof Error ? error.message : '';
+  if (/No blob credentials|No read-write token|BLOB_STORE_ID|BLOB_READ_WRITE_TOKEN/i.test(message)) {
+    throw new Error('This deployment cannot see the Blob store. In Vercel, open the store, connect it to Production, then redeploy.');
   }
+  throw error instanceof Error ? error : new Error('The file could not be saved.');
 }
 
 function postPath(slug: string) {
@@ -78,7 +80,6 @@ async function readPrivate(pathname: string) {
 }
 
 export async function storedInsights() {
-  assertStore();
   const [postNames, deletedNames] = await Promise.all([
     listPathnames(POST_PREFIX),
     listPathnames(DELETED_PREFIX),
@@ -102,8 +103,12 @@ export async function deletePost(slug: string) {
     return 'file' as const;
   }
 
-  assertStore();
-  const stored = await readPrivate(postPath(slug));
+  let stored: string | null;
+  try {
+    stored = await readPrivate(postPath(slug));
+  } catch (error) {
+    explainBlobError(error);
+  }
   const onDisk = fs.existsSync(file);
   if (!stored && !onDisk) throw new Error('That post is already gone.');
   if (stored) await del(postPath(slug));
@@ -122,20 +127,23 @@ export async function savePost(post: StoredPost, previousSlug?: string) {
   const contents = serializePost(post);
 
   if (usesProjectStore()) {
-    assertStore();
-    await put(postPath(post.slug), contents, {
-      access: 'private',
-      addRandomSuffix: false,
-      allowOverwrite: true,
-      contentType: 'text/markdown',
-    });
     try {
-      await del(deletedPath(post.slug));
+      await put(postPath(post.slug), contents, {
+        access: 'private',
+        addRandomSuffix: false,
+        allowOverwrite: true,
+        contentType: 'text/markdown',
+      });
+      try {
+        await del(deletedPath(post.slug));
+      } catch (error) {
+        if (!(error instanceof BlobNotFoundError)) throw error;
+      }
+      if (previousSlug && previousSlug !== post.slug) await deletePost(previousSlug);
+      return 'store' as const;
     } catch (error) {
-      if (!(error instanceof BlobNotFoundError)) throw error;
+      explainBlobError(error);
     }
-    if (previousSlug && previousSlug !== post.slug) await deletePost(previousSlug);
-    return 'store' as const;
   }
 
   fs.mkdirSync(INSIGHTS_DIR, { recursive: true });
@@ -163,14 +171,18 @@ export async function saveImage(bytes: Buffer, extension: string) {
   const publicPath = `/insights/${name}`;
 
   if (usesProjectStore()) {
-    assertStore();
     const type = Object.entries(IMAGE_TYPES).find(([, value]) => value === extension)?.[0] ?? 'application/octet-stream';
-    const blob = await put(`insights/images/${name}`, bytes, {
-      access: 'public',
-      addRandomSuffix: false,
-      contentType: type,
-    });
-    return blob.url;
+    try {
+      await put(`insights/images/${name}`, bytes, {
+        access: 'private',
+        addRandomSuffix: false,
+        allowOverwrite: true,
+        contentType: type,
+      });
+    } catch (error) {
+      explainBlobError(error);
+    }
+    return `/insights/media/${name}`;
   }
 
   fs.mkdirSync(IMAGE_DIR, { recursive: true });
