@@ -1,6 +1,7 @@
 import { randomBytes } from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import { BlobNotFoundError, del, get, list, put } from '@vercel/blob';
 import type { Insight } from '@/lib/insights';
 
 const INSIGHTS_DIR = path.join(process.cwd(), 'content/insights');
@@ -34,119 +35,113 @@ export function serializePost(post: StoredPost) {
   return lines.join('\n');
 }
 
-type GithubConfig = { token: string; repository: string; branch: string };
+const POST_PREFIX = 'insights/posts/';
+const DELETED_PREFIX = 'insights/deleted/';
 
-function githubConfig(): GithubConfig | null {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) return null;
-  return {
-    token,
-    repository: process.env.GITHUB_REPOSITORY ?? 'Nico-Traczuk/tgn-studios-website',
-    branch: process.env.GITHUB_BRANCH ?? 'main',
-  };
-}
-
-function usesGithub() {
+export function usesProjectStore() {
   return process.env.VERCEL === '1';
 }
 
-async function githubContents(config: GithubConfig, filePath: string, init?: RequestInit) {
-  const encoded = filePath.split('/').map(encodeURIComponent).join('/');
-  const url = new URL(`https://api.github.com/repos/${config.repository}/contents/${encoded}`);
-  if (!init?.method || init.method === 'GET') url.searchParams.set('ref', config.branch);
-  const response = await fetch(url, {
-    ...init,
-    headers: {
-      Authorization: `Bearer ${config.token}`,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json',
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-  });
-  return response;
+function assertStore() {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    throw new Error('In Vercel, open Storage, create a Blob store, and connect it to this project. The site then saves posts itself.');
+  }
 }
 
-async function githubSha(config: GithubConfig, filePath: string) {
-  const response = await githubContents(config, filePath);
-  if (response.status === 404) return undefined;
-  if (!response.ok) throw new Error('Could not reach GitHub to save this post.');
-  const data = await response.json() as { sha?: string };
-  return data.sha;
+function postPath(slug: string) {
+  return `${POST_PREFIX}${slug}.md`;
 }
 
-async function githubWrite(filePath: string, content: Buffer | string, message: string) {
-  const config = githubConfig();
-  if (!config) throw new Error('Set GITHUB_TOKEN so posts can be saved on the live site.');
-  const sha = await githubSha(config, filePath);
-  const body = Buffer.isBuffer(content) ? content : Buffer.from(content, 'utf8');
-  const response = await githubContents(config, filePath, {
-    method: 'PUT',
-    body: JSON.stringify({
-      message,
-      content: body.toString('base64'),
-      branch: config.branch,
-      sha,
-    }),
-  });
-  if (!response.ok) throw new Error('GitHub did not accept the saved post.');
+function deletedPath(slug: string) {
+  return `${DELETED_PREFIX}${slug}`;
 }
 
-async function githubRemove(filePath: string, message: string) {
-  const config = githubConfig();
-  if (!config) return;
-  const sha = await githubSha(config, filePath);
-  if (!sha) return;
-  const response = await githubContents(config, filePath, {
-    method: 'DELETE',
-    body: JSON.stringify({ message, sha, branch: config.branch }),
-  });
-  if (!response.ok) throw new Error('GitHub did not remove the previous post file.');
+function fileFor(slug: string) {
+  return path.join(INSIGHTS_DIR, `${slug}.md`);
+}
+
+async function listPathnames(prefix: string) {
+  const pathnames: string[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await list({ prefix, cursor, limit: 1000 });
+    pathnames.push(...page.blobs.map((blob) => blob.pathname));
+    cursor = page.hasMore ? page.cursor : undefined;
+  } while (cursor);
+  return pathnames;
+}
+
+async function readPrivate(pathname: string) {
+  const result = await get(pathname, { access: 'private', useCache: false });
+  if (!result || result.statusCode !== 200) return null;
+  return new Response(result.stream).text();
+}
+
+export async function storedInsights() {
+  assertStore();
+  const [postNames, deletedNames] = await Promise.all([
+    listPathnames(POST_PREFIX),
+    listPathnames(DELETED_PREFIX),
+  ]);
+  const posts = (await Promise.all(postNames.map(async (pathname) => {
+    const source = await readPrivate(pathname);
+    if (!source) return null;
+    const fileName = pathname.slice(POST_PREFIX.length);
+    return { fileName, source };
+  }))).filter((item): item is { fileName: string; source: string } => item !== null);
+
+  const deleted = deletedNames.map((pathname) => pathname.slice(DELETED_PREFIX.length)).filter(Boolean);
+  return { posts, deleted };
 }
 
 export async function deletePost(slug: string) {
-  const filename = `${slug}.md`;
-  const repoPath = `content/insights/${filename}`;
-
-  if (usesGithub()) {
-    const config = githubConfig();
-    if (!config) throw new Error('Set GITHUB_TOKEN so posts can be deleted on the live site.');
-    const sha = await githubSha(config, repoPath);
-    if (!sha) throw new Error('That post is already gone.');
-    const response = await githubContents(config, repoPath, {
-      method: 'DELETE',
-      body: JSON.stringify({
-        message: `Delete insight: ${slug}`,
-        sha,
-        branch: config.branch,
-      }),
-    });
-    if (!response.ok) throw new Error('GitHub did not delete the post.');
-    return 'github' as const;
+  const file = fileFor(slug);
+  if (!usesProjectStore()) {
+    if (!fs.existsSync(file)) throw new Error('That post is already gone.');
+    fs.unlinkSync(file);
+    return 'file' as const;
   }
 
-  const file = path.join(INSIGHTS_DIR, filename);
-  if (!fs.existsSync(file)) throw new Error('That post is already gone.');
-  fs.unlinkSync(file);
-  return 'file' as const;
+  assertStore();
+  const stored = await readPrivate(postPath(slug));
+  const onDisk = fs.existsSync(file);
+  if (!stored && !onDisk) throw new Error('That post is already gone.');
+  if (stored) await del(postPath(slug));
+  if (onDisk) {
+    await put(deletedPath(slug), '1', {
+      access: 'private',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: 'text/plain',
+    });
+  }
+  return 'store' as const;
 }
 
 export async function savePost(post: StoredPost, previousSlug?: string) {
-  const filename = `${post.slug}.md`;
   const contents = serializePost(post);
-  const message = `${post.draft ? 'Save draft' : 'Publish'}: ${post.title}`;
 
-  if (usesGithub()) {
-    await githubWrite(`content/insights/${filename}`, contents, message);
-    if (previousSlug && previousSlug !== post.slug) {
-      await githubRemove(`content/insights/${previousSlug}.md`, `Remove previous file for ${post.title}`);
+  if (usesProjectStore()) {
+    assertStore();
+    await put(postPath(post.slug), contents, {
+      access: 'private',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: 'text/markdown',
+    });
+    try {
+      await del(deletedPath(post.slug));
+    } catch (error) {
+      if (!(error instanceof BlobNotFoundError)) throw error;
     }
-    return 'github' as const;
+    if (previousSlug && previousSlug !== post.slug) await deletePost(previousSlug);
+    return 'store' as const;
   }
 
   fs.mkdirSync(INSIGHTS_DIR, { recursive: true });
-  fs.writeFileSync(path.join(INSIGHTS_DIR, filename), contents, 'utf8');
+  fs.writeFileSync(fileFor(post.slug), contents, 'utf8');
   if (previousSlug && previousSlug !== post.slug) {
-    const previous = path.join(INSIGHTS_DIR, `${previousSlug}.md`);
+    const previous = fileFor(previousSlug);
     if (fs.existsSync(previous)) fs.unlinkSync(previous);
   }
   return 'file' as const;
@@ -167,9 +162,15 @@ export async function saveImage(bytes: Buffer, extension: string) {
   const name = `${Date.now().toString(36)}-${randomBytes(4).toString('hex')}.${extension}`;
   const publicPath = `/insights/${name}`;
 
-  if (usesGithub()) {
-    await githubWrite(`public/insights/${name}`, bytes, `Add insight image ${name}`);
-    return publicPath;
+  if (usesProjectStore()) {
+    assertStore();
+    const type = Object.entries(IMAGE_TYPES).find(([, value]) => value === extension)?.[0] ?? 'application/octet-stream';
+    const blob = await put(`insights/images/${name}`, bytes, {
+      access: 'public',
+      addRandomSuffix: false,
+      contentType: type,
+    });
+    return blob.url;
   }
 
   fs.mkdirSync(IMAGE_DIR, { recursive: true });

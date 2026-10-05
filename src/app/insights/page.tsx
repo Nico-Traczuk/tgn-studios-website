@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function InsightsPage() {
-  const posts = getPublishedInsights();
+  const posts = await getPublishedInsights();
   const writer = await getWriterSession();
 
   return (

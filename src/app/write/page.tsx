@@ -9,7 +9,7 @@ export default async function WritePage() {
   const writer = await getWriterSession();
   if (!writer) redirect('/login?next=/write');
 
-  const posts = getAllInsights().map((post) => ({
+  const posts = (await getAllInsights()).map((post) => ({
     slug: post.slug,
     title: post.title,
     date: post.date,

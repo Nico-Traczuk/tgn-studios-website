@@ -182,9 +182,7 @@ export default function PostEditor({ writerName, initial }: { writerName: string
       return;
     }
     setSavedSlug(payload.slug);
-    setStatus(payload.via === 'github'
-      ? 'Saved. The live site updates after the next deploy.'
-      : draft ? 'Draft saved.' : 'Published.');
+    setStatus(draft ? 'Draft saved.' : 'Published.');
     if (payload.slug && payload.slug !== initial.originalSlug) {
       router.replace(`/write/${payload.slug}`);
     } else {

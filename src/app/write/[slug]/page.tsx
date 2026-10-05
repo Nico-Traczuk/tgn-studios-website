@@ -39,7 +39,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ slug:
   if (!writer) redirect(`/login?next=${encodeURIComponent(`/write/${slug}`)}`);
   if (slug === 'new') return <PostEditor writerName={writer.name} initial={blankPost()} />;
 
-  const post = getInsight(slug);
+  const post = await getInsight(slug);
   if (!post) notFound();
 
   const html = sanitizePostHtml(post.format === 'html' ? post.body : markdownToHtml(post.body));
