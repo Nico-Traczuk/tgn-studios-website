@@ -4,6 +4,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import Insights from '@/components/Insights';
 import Footer from '@/components/Footer';
 import { getPublishedInsights } from '@/lib/insights';
+import { getWriterSession } from '@/lib/writers';
 
 export const metadata: Metadata = {
   title: 'Insights — TGN Studios',
@@ -11,15 +12,16 @@ export const metadata: Metadata = {
   alternates: { canonical: '/insights' },
 };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
   const posts = getPublishedInsights();
+  const writer = await getWriterSession();
 
   return (
     <>
       <Nav />
       <ScrollProgress />
       <main>
-        <Insights posts={posts} />
+        <Insights posts={posts} canEdit={Boolean(writer)} />
         <Footer />
       </main>
     </>

@@ -1,16 +1,27 @@
 import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { sanitizePostHtml } from '@/lib/sanitize-post';
 
 type Props = {
   body: string;
   ctaHref: string;
+  format?: 'markdown' | 'html';
 };
 
 function isExternal(href: string) {
   return href.startsWith('https://') || href.startsWith('http://');
 }
 
-export default function InsightBody({ body, ctaHref }: Props) {
+export default function InsightBody({ body, ctaHref, format = 'markdown' }: Props) {
+  if (format === 'html') {
+    return (
+      <div
+        className="insight-prose"
+        dangerouslySetInnerHTML={{ __html: sanitizePostHtml(body) }}
+      />
+    );
+  }
+
   const components: Components = {
     a: ({ href, children }) => {
       if (!href) return <>{children}</>;

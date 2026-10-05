@@ -2,10 +2,11 @@ import fs from 'fs';
 import path from 'path';
 
 /**
- * Insights posts are Markdown files in /content/insights.
- * To add one: copy an existing file, keep the filename equal to `slug`,
- * fill in the front matter, and set `draft: false` when it should go live.
- * Supported body syntax: headings, paragraphs, lists, links, emphasis, and tables.
+ * Insights posts are files in /content/insights.
+ * Darrel and Amadeu can create them at /write.
+ * A file can still be added by hand: match the filename to `slug`,
+ * fill in the front matter, and set `draft: false` to publish.
+ * `format: html` stores editor HTML. Other posts are Markdown.
  */
 
 const INSIGHTS_DIR = path.join(process.cwd(), 'content/insights');
@@ -38,6 +39,7 @@ export type Insight = {
   episode?: string;
   replay?: string;
   draft: boolean;
+  format: 'markdown' | 'html';
   body: string;
 };
 
@@ -45,12 +47,15 @@ type FrontMatterValue = string | boolean | string[];
 
 function unquote(value: string) {
   const trimmed = value.trim();
-  if (
-    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
-    (trimmed.startsWith("'") && trimmed.endsWith("'"))
-  ) {
-    return trimmed.slice(1, -1);
+  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (typeof parsed === 'string') return parsed;
+    } catch {
+      return trimmed.slice(1, -1);
+    }
   }
+  if (trimmed.startsWith("'") && trimmed.endsWith("'")) return trimmed.slice(1, -1);
   return trimmed;
 }
 
@@ -158,8 +163,13 @@ function loadInsight(fileName: string): Insight {
     episode: typeof data.episode === 'string' ? data.episode : undefined,
     replay,
     draft: data.draft === true,
+    format: data.format === 'html' ? 'html' : 'markdown',
     body,
   };
+}
+
+export function isValidSlug(slug: string) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
 }
 
 function loadInsights() {
@@ -172,8 +182,16 @@ function loadInsights() {
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.title.localeCompare(b.title)));
 }
 
+export function getAllInsights() {
+  return loadInsights();
+}
+
+export function getInsight(slug: string) {
+  return getAllInsights().find((post) => post.slug === slug);
+}
+
 export function getPublishedInsights() {
-  return loadInsights().filter((post) => !post.draft);
+  return getAllInsights().filter((post) => !post.draft);
 }
 
 export function getPublishedInsight(slug: string) {
