@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function WriteHeader({ name }: { name?: string }) {
   async function logout() {
     await fetch('/api/write/logout', { method: 'POST' });
-    window.location.href = '/write';
+    window.location.href = '/';
   }
 
   return (

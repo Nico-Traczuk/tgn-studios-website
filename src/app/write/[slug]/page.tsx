@@ -34,10 +34,9 @@ function blankPost(): EditorDraft {
 }
 
 export default async function EditPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const writer = await getWriterSession();
-  if (!writer) redirect('/write');
-
   const { slug } = await params;
+  const writer = await getWriterSession();
+  if (!writer) redirect(`/login?next=${encodeURIComponent(`/write/${slug}`)}`);
   if (slug === 'new') return <PostEditor writerName={writer.name} initial={blankPost()} />;
 
   const post = getInsight(slug);

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Nav from '@/components/Nav';
+import SiteNav from '@/components/SiteNav';
 import ScrollProgress from '@/components/ScrollProgress';
 import InsightArticle from '@/components/InsightArticle';
 import Footer from '@/components/Footer';
@@ -78,7 +78,7 @@ export default async function InsightPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <Nav />
+      <SiteNav />
       <ScrollProgress />
       <main>
         <InsightArticle post={post} editHref={writer ? `/write/${post.slug}` : undefined} />

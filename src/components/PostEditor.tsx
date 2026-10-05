@@ -174,7 +174,7 @@ export default function PostEditor({ writerName, initial }: { writerName: string
     const payload = await response.json().catch(() => ({}));
     setPending(false);
     if (response.status === 401) {
-      window.location.href = '/write';
+      window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}`;
       return;
     }
     if (!response.ok) {

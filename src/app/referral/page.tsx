@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav';
+import SiteNav from '@/components/SiteNav';
 import ScrollProgress from '@/components/ScrollProgress';
 import Referral from '@/components/Referral';
 import Footer from '@/components/Footer';
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ReferralPage() {
   return (
     <>
-      <Nav />
+      <SiteNav />
       <ScrollProgress />
       <main>
         <Referral />

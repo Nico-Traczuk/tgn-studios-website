@@ -1,13 +1,13 @@
+import { redirect } from 'next/navigation';
 import WriteDesk from '@/components/WriteDesk';
-import WriteLogin from '@/components/WriteLogin';
 import { getAllInsights } from '@/lib/insights';
-import { getWriterSession, writingConfigured } from '@/lib/writers';
+import { getWriterSession } from '@/lib/writers';
 
 export const dynamic = 'force-dynamic';
 
 export default async function WritePage() {
   const writer = await getWriterSession();
-  if (!writer) return <WriteLogin configured={writingConfigured()} />;
+  if (!writer) redirect('/login?next=/write');
 
   const posts = getAllInsights().map((post) => ({
     slug: post.slug,

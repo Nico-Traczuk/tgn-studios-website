@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav';
+import SiteNav from '@/components/SiteNav';
 import ScrollProgress from '@/components/ScrollProgress';
 import Insights from '@/components/Insights';
 import Footer from '@/components/Footer';
@@ -18,7 +18,7 @@ export default async function InsightsPage() {
 
   return (
     <>
-      <Nav />
+      <SiteNav />
       <ScrollProgress />
       <main>
         <Insights posts={posts} canEdit={Boolean(writer)} />
