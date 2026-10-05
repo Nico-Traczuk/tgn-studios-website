@@ -1,9 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { storedInsights, usesProjectStore } from '@/lib/post-store';
 
 /**
  * Insights posts are files in /content/insights.
  * Darrel and Amadeu can create them at /write.
+ * On Vercel, saved posts live in the project's Blob store and override these files.
  * A file can still be added by hand: match the filename to `slug`,
  * fill in the front matter, and set `draft: false` to publish.
  * `format: html` stores editor HTML. Other posts are Markdown.
@@ -107,9 +109,8 @@ function requireString(data: Record<string, FrontMatterValue>, key: string, file
   return value;
 }
 
-function loadInsight(fileName: string): Insight {
-  const raw = fs.readFileSync(path.join(INSIGHTS_DIR, fileName), 'utf8');
-  const { data, body } = parseFrontMatter(raw, fileName);
+export function insightFromSource(source: string, fileName: string): Insight {
+  const { data, body } = parseFrontMatter(source, fileName);
 
   for (const field of REQUIRED_FIELDS) {
     requireString(data, field, fileName);
@@ -172,30 +173,51 @@ export function isValidSlug(slug: string) {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
 }
 
+function sortInsights(posts: Insight[]) {
+  return posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.title.localeCompare(b.title)));
+}
+
 function loadInsights() {
   if (!fs.existsSync(INSIGHTS_DIR)) return [];
 
   return fs
     .readdirSync(INSIGHTS_DIR)
     .filter((fileName) => fileName.endsWith('.md'))
-    .map(loadInsight)
-    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.title.localeCompare(b.title)));
+    .map((fileName) => insightFromSource(fs.readFileSync(path.join(INSIGHTS_DIR, fileName), 'utf8'), fileName));
 }
 
-export function getAllInsights() {
-  return loadInsights();
+export function mergeInsights(files: Insight[], stored: Insight[], deleted: string[]) {
+  const hidden = new Set(deleted);
+  const bySlug = new Map<string, Insight>();
+  for (const post of files) {
+    if (!hidden.has(post.slug)) bySlug.set(post.slug, post);
+  }
+  for (const post of stored) bySlug.set(post.slug, post);
+  return sortInsights([...bySlug.values()]);
 }
 
-export function getInsight(slug: string) {
-  return getAllInsights().find((post) => post.slug === slug);
+export async function getAllInsights() {
+  const files = loadInsights();
+  if (!usesProjectStore() || !process.env.BLOB_READ_WRITE_TOKEN) return sortInsights(files);
+
+  const remote = await storedInsights();
+  const stored = remote.posts.map((item) => insightFromSource(item.source, item.fileName));
+  return mergeInsights(files, stored, remote.deleted);
 }
 
-export function getPublishedInsights() {
-  return getAllInsights().filter((post) => !post.draft);
+export async function getInsight(slug: string) {
+  const posts = await getAllInsights();
+  return posts.find((post) => post.slug === slug);
 }
 
-export function getPublishedInsight(slug: string) {
-  return getPublishedInsights().find((post) => post.slug === slug);
+export async function getPublishedInsights() {
+  const posts = await getAllInsights();
+  return posts.filter((post) => !post.draft);
+}
+
+export async function getPublishedInsight(slug: string) {
+  const posts = await getPublishedInsights();
+  return posts.find((post) => post.slug === slug);
 }
 
 export function formatInsightDate(isoDate: string) {

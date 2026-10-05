@@ -2,8 +2,10 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/config';
 import { getPublishedInsights } from '@/lib/insights';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getPublishedInsights().map((post) => ({
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = (await getPublishedInsights()).map((post) => ({
     url: `${SITE_URL}/insights/${post.slug}`,
     lastModified: post.date,
     changeFrequency: 'monthly' as const,

@@ -75,7 +75,7 @@ export async function POST(request: Request) {
     }
   }
 
-  const existing = getInsight(slug);
+  const existing = await getInsight(slug);
   if (existing && slug !== originalSlug) {
     return NextResponse.json({ error: 'Another post already uses that slug.' }, { status: 409 });
   }
@@ -115,7 +115,7 @@ export async function DELETE(request: Request) {
   if (!isValidSlug(slug) || slug === 'new') {
     return NextResponse.json({ error: 'That post could not be found.' }, { status: 400 });
   }
-  if (!getInsight(slug)) {
+  if (!(await getInsight(slug))) {
     return NextResponse.json({ error: 'That post could not be found.' }, { status: 404 });
   }
 

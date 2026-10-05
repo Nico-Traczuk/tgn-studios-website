@@ -12,7 +12,7 @@ export default async function PreviewPostPage({ params }: { params: Promise<{ sl
   const { slug } = await params;
   const writer = await getWriterSession();
   if (!writer) redirect(`/login?next=${encodeURIComponent(`/write/preview/${slug}`)}`);
-  const post = getInsight(slug);
+  const post = await getInsight(slug);
   if (!post) notFound();
 
   return (

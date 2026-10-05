@@ -12,15 +12,16 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getPublishedInsights().map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const posts = await getPublishedInsights();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPublishedInsight(slug);
+  const post = await getPublishedInsight(slug);
   if (!post) return {};
 
   return {
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function InsightPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPublishedInsight(slug);
+  const post = await getPublishedInsight(slug);
   if (!post) notFound();
   const writer = await getWriterSession();
 
